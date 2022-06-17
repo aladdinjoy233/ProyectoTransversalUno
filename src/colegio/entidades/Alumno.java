@@ -32,7 +32,7 @@ public class Alumno {
     this.activo = activo;
   }
 
-// Getters y setters
+// Gett and sett
   public int getId() {
     return id;
   }

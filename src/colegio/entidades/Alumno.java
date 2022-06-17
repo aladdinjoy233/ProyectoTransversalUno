@@ -1,4 +1,4 @@
-package colegio.modelo;
+package colegio.entidades;
 
 import java.time.LocalDate;
 

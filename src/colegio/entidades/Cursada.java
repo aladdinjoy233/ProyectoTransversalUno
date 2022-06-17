@@ -1,4 +1,4 @@
-package colegio.modelo;
+package colegio.entidades;
 
 public class Cursada {
 

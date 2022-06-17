@@ -11,7 +11,7 @@ public class Alumno {
   private long dni;
   private boolean activo;
 
-// Constructoress
+// Constructores
   public Alumno() {
   }
 

@@ -61,7 +61,7 @@ public class Materia {
 // Metodos
   @Override
   public String toString() {
-    return "Materia{" + "nombre=" + nombre + ", anio=" + anio + ", activo=" + activo + '}';
+    return "== Materia ==\n" + "Nombre: " + nombre + "\nAnio: " + anio + "\nActivo: " + activo;
   }
 
   @Override

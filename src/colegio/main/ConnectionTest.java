@@ -1,9 +1,12 @@
 package colegio.main;
 
+import colegio.dao.AlumnoData;
 import colegio.dao.Conexion;
 import colegio.entidades.*;
 import java.sql.Connection;
 import java.time.LocalDate;
+import java.util.ArrayList;
+import javax.swing.JOptionPane;
 
 public class ConnectionTest {
 
@@ -11,16 +14,23 @@ public class ConnectionTest {
 
 // Probar conecion con base de datos
     Conexion c = new Conexion();
-    Connection recibido = c.getConexion();
+    AlumnoData ad = new AlumnoData(c);
 
-// Probar clases entidades
-    Alumno alum = new Alumno("Luis", "Mercado", LocalDate.of(2000, 3, 22), 12345678, false);
-    Materia mat = new Materia("Programacion", 1, true);
-    Cursada curs = new Cursada(alum, mat, 5);
-
-    System.out.println(curs);
-
+    ArrayList<Alumno> alumnos = ad.obtenerAlumnos();
+    
+    for (Alumno alumno : alumnos) {
+      System.out.println("== Alumno ==");
+      System.out.println("Nombre: " + alumno.getNombre());
+      System.out.println("Apellido: " + alumno.getApellido());
+    }
+    
+    Alumno alum = ad.obtenerAlumno(4);
+    
+    alum.setApellido("Chica");
+    ad.modificarAlumno(alum);
+    
+    ad.desactivarAlumnos(4);
 
   }
-  
+
 }

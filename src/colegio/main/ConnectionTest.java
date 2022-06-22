@@ -25,12 +25,12 @@ public class ConnectionTest {
       System.out.println("Apellido: " + alumno.getApellido());
     }
     
-    Alumno alum = ad.obtenerAlumno(4);
+    Alumno alum = ad.obtenerAlumno(2);
     
-    alum.setApellido("Chica");
+    alum.setApellido("chica");
     ad.modificarAlumno(alum);
     
-    ad.desactivarAlumnos(4);
+   ad.desactivarAlumnos(2);
     
     //---------------------------------------------------------//
     
@@ -43,11 +43,11 @@ public class ConnectionTest {
     }
       
      Materia mater = md.obtenerMateria(2);  
-     mater.setNombre("lengua");
+     mater.setNombre("lalalalallala");
      md.modificarMateria(mater);
      
      md.desactivarMaterias(2);
-       
+   
   }
 
 }

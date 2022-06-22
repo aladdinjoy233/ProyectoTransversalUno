@@ -2,6 +2,7 @@ package colegio.main;
 
 import colegio.dao.AlumnoData;
 import colegio.dao.Conexion;
+import colegio.dao.MateriaData;
 import colegio.entidades.*;
 import java.sql.Connection;
 import java.time.LocalDate;
@@ -17,7 +18,7 @@ public class ConnectionTest {
     AlumnoData ad = new AlumnoData(c);
 
     ArrayList<Alumno> alumnos = ad.obtenerAlumnos();
-    
+         
     for (Alumno alumno : alumnos) {
       System.out.println("== Alumno ==");
       System.out.println("Nombre: " + alumno.getNombre());
@@ -30,7 +31,23 @@ public class ConnectionTest {
     ad.modificarAlumno(alum);
     
     ad.desactivarAlumnos(4);
+    
+    //---------------------------------------------------------//
+    
+    MateriaData md = new MateriaData(c);
+     ArrayList<Materia> materias = md.obtenerMaterias();
 
+       for (Materia materia : materias) {
+      System.out.println("== Materia ==");
+      System.out.println("Nombre: " + materia.getNombre());
+    }
+      
+     Materia mater = md.obtenerMateria(2);  
+     mater.setNombre("lengua");
+     md.modificarMateria(mater);
+     
+     md.desactivarMaterias(2);
+       
   }
 
 }

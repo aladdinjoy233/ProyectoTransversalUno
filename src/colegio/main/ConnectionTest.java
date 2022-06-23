@@ -63,16 +63,9 @@ public class ConnectionTest {
 //     md.modificarMateria(mater);
 //     
 //     md.desactivarMaterias(2);
-
-    Cursada curs = new Cursada();
-    
-    curs.setAlumno(ad.obtenerAlumno(13));
-    curs.setMateria(md.obtenerMateria(6));
     
     CursadaData cd = new CursadaData(c);
     
-    cd.guardarCursada(curs);
-
     ArrayList<Cursada> cursadas = cd.obtenerCursadas();
     
     cursadas.forEach(cursada -> {
@@ -81,6 +74,11 @@ public class ConnectionTest {
       System.out.println(cursada.getMateria());
       System.out.println(cursada.getNota());
     });
+    
+    Alumno alum = ad.obtenerAlumno(13);
+    Materia mat = md.obtenerMateria(6);
+    
+    cd.actualizarNota(alum, mat, 10);
    
   }
 

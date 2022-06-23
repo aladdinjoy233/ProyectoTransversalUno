@@ -81,9 +81,33 @@ public class CursadaData {
       ps.close();
       
     } catch(SQLException exc) {
-      JOptionPane.showMessageDialog(null, "No se pudo obtener cursadas" + exc);
+      JOptionPane.showMessageDialog(null, "No se pudo obtener cursadas " + exc);
     }
     
     return cursadas;
+  }
+  
+  public boolean actualizarNota(Alumno alum, Materia mat, double nota) {
+    boolean actualizado = false;
+    
+    String sql = "UPDATE cursada SET nota = ? WHERE idAlumno = ? AND idMateria = ?";
+    
+    try {
+      
+      PreparedStatement ps = con.prepareStatement(sql);
+      
+      ps.setDouble(1, nota);
+      ps.setInt(2, alum.getId());
+      ps.setInt(3, mat.getId());
+      
+      ps.executeUpdate();
+      
+      ps.close();
+      
+    } catch(SQLException exc) {
+      JOptionPane.showMessageDialog(null, "No se pudo actualizar la nota " + exc);
+    }
+    
+    return actualizado;
   }
 }

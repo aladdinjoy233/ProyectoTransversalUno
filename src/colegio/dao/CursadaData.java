@@ -32,7 +32,7 @@ public class CursadaData {
       PreparedStatement ps = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
       ps.setInt(1, cursada.getAlumno().getId());
       ps.setInt(2, cursada.getMateria().getId());
-      ps.setDouble(2, cursada.getNota());
+      ps.setDouble(3, cursada.getNota());
       
       ps.executeUpdate();
       

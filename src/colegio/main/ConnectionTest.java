@@ -2,6 +2,7 @@ package colegio.main;
 
 import colegio.dao.AlumnoData;
 import colegio.dao.Conexion;
+import colegio.dao.CursadaData;
 import colegio.dao.MateriaData;
 import colegio.entidades.*;
 import java.sql.Connection;
@@ -17,6 +18,7 @@ public class ConnectionTest {
 // Probar conecion con base de datos
     Conexion c = new Conexion();
     AlumnoData ad = new AlumnoData(c);
+    MateriaData md = new MateriaData(c);
     
 //    Alumno a = new Alumno("Allan", "Chica", LocalDate.of(2002, Month.JANUARY, 22), 30357159, true);
 //    Alumno b = new Alumno("Agustina", "Ojeda", LocalDate.of(2004, Month.MAY, 4), 31951753, true);
@@ -30,13 +32,13 @@ public class ConnectionTest {
 //    ad.agregarAlumno(e);
 //    ad.agregarAlumno(f);
     
-    ArrayList<Alumno> alumnos = ad.obtenerAlumnos();
-         
-    for (Alumno alumno : alumnos) {
-      System.out.println("== Alumno ==");
-      System.out.println("Nombre: " + alumno.getNombre());
-      System.out.println("Apellido: " + alumno.getApellido());
-    }
+//    ArrayList<Alumno> alumnos = ad.obtenerAlumnos();
+//         
+//    for (Alumno alumno : alumnos) {
+//      System.out.println("== Alumno ==");
+//      System.out.println("Nombre: " + alumno.getNombre());
+//      System.out.println("Apellido: " + alumno.getApellido());
+//    }
     
     
 //    Alumno alum = ad.obtenerAlumno(2);
@@ -61,6 +63,24 @@ public class ConnectionTest {
 //     md.modificarMateria(mater);
 //     
 //     md.desactivarMaterias(2);
+
+    Cursada curs = new Cursada();
+    
+    curs.setAlumno(ad.obtenerAlumno(13));
+    curs.setMateria(md.obtenerMateria(6));
+    
+    CursadaData cd = new CursadaData(c);
+    
+    cd.guardarCursada(curs);
+
+    ArrayList<Cursada> cursadas = cd.obtenerCursadas();
+    
+    cursadas.forEach(cursada -> {
+      System.out.println("~~~ Cursada ~~~");
+      System.out.println(cursada.getAlumno());
+      System.out.println(cursada.getMateria());
+      System.out.println(cursada.getNota());
+    });
    
   }
 

@@ -19,7 +19,9 @@ public class ConnectionTest {
     Conexion c = new Conexion();
     AlumnoData ad = new AlumnoData(c);
     MateriaData md = new MateriaData(c);
+    CursadaData cd = new CursadaData(c);
     
+//-------------------------------------------Agregar Alumnos a la BD-------------------------------------     
 //    Alumno a = new Alumno("Allan", "Chica", LocalDate.of(2002, Month.JANUARY, 22), 30357159, true);
 //    Alumno b = new Alumno("Agustina", "Ojeda", LocalDate.of(2004, Month.MAY, 4), 31951753, true);
 //    Alumno d = new Alumno("Valeria", "Miranda", LocalDate.of(1991, Month.FEBRUARY, 14), 30852456, true);
@@ -31,7 +33,7 @@ public class ConnectionTest {
 //    ad.agregarAlumno(d);
 //    ad.agregarAlumno(e);
 //    ad.agregarAlumno(f);
-    
+//---------------------------------------------Mostrar Alumnos en la Bd---------------------------------
 //    ArrayList<Alumno> alumnos = ad.obtenerAlumnos();
 //         
 //    for (Alumno alumno : alumnos) {
@@ -40,7 +42,7 @@ public class ConnectionTest {
 //      System.out.println("Apellido: " + alumno.getApellido());
 //    }
     
-    
+//-------------------------------------Modificar Alumnos en la BD----------------------------------    
 //    Alumno alum = ad.obtenerAlumno(2);
 //    
 //    alum.setApellido("chica");
@@ -48,9 +50,8 @@ public class ConnectionTest {
 //    
 //   ad.desactivarAlumnos(2);
     
-    //---------------------------------------------------------//
+    //---------------------Modificar Materias en la BD------------------------------------//
     
-//    MateriaData md = new MateriaData(c);
 //     ArrayList<Materia> materias = md.obtenerMaterias();
 //
 //       for (Materia materia : materias) {
@@ -63,8 +64,26 @@ public class ConnectionTest {
 //     md.modificarMateria(mater);
 //     
 //     md.desactivarMaterias(2);
-    
-    CursadaData cd = new CursadaData(c);
+
+
+//----------------------Inscripcion a Materias Ya Creadas en la BD----------------------------//
+
+//      CursadaData inscribMat = new CursadaData(c);//crear un objeto InscripcionDATA
+//      Alumno alum = ad.obtenerAlumno(5);//crear un objeto Alumno y tomar el Objeto "ad" de AlumnoDATA para asignarle por ID un Alumno de la BD
+//      Materia mat = md.obtenerMateria(1);//crear un objeto Materia y tomar el Objeto "md" de MateriaDATA para asignarle por ID una Materia de la BD
+//      Cursada curs = new Cursada(alum, mat, 1);//Crear un objeto Cursada y asignandole los 2 objetos y la nota en la 3ra posicion.
+     
+//      inscribMat.guardarCursada(curs);//Guardar en la BD la nota
+      
+      //Mostrar como quedo la Lista//
+//      ArrayList <Cursada>inscList = inscribMat.obtenerCursadas();
+//      for(Cursada cursad : inscList ){
+//          System.out.println("Apellido del Alumno: "+cursad.getAlumno().getApellido());
+//          System.out.println("Materia: "+ cursad.getMateria().getNombre());
+//          System.out.println("Nota: "+ cursad.getNota());
+//      }     
+
+//---------------------Modificar Notas de Materias en la BD------------------------------------//    
     
     ArrayList<Cursada> cursadas = cd.obtenerCursadas();
     

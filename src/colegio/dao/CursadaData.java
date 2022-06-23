@@ -100,7 +100,9 @@ public class CursadaData {
       ps.setInt(2, alum.getId());
       ps.setInt(3, mat.getId());
       
-      ps.executeUpdate();
+      if (ps.executeUpdate() != 0) {
+        actualizado = true;
+      }
       
       ps.close();
       

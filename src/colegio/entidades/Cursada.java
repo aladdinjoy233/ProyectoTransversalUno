@@ -6,7 +6,7 @@ public class Cursada {
   private int id;
   private Alumno alumno;
   private Materia materia;
-  private double nota;
+  private double nota = 0;
 
 // Constructores
 

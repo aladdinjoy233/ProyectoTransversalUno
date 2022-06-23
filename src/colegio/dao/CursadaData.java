@@ -113,3 +113,10 @@ public class CursadaData {
     return actualizado;
   }
 }
+
+//Funcionalidades que faltarían:
+//Borrar una cursada (delete)
+//Dado un alumno nos devuelva las materias en las que está inscripto
+//Dado un alumno nos devuelva las materias en las que NO está inscripto
+//Dada una materia nos devuelva los alumnos inscriptos en ella.
+

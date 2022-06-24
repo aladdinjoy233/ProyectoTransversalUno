@@ -11,7 +11,7 @@ import java.time.Month;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
 
-public class ConnectionTest {
+public class GrupoMain {
 
   public static void main(String[] args) {
 

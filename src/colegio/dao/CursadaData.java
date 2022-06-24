@@ -6,7 +6,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.util.ArrayList;
+import java.util.*;
 import javax.swing.JOptionPane;
 
 public class CursadaData {
@@ -114,6 +114,40 @@ public class CursadaData {
         return actualizado;
     }
 
+    //Dado un alumno nos devuelva las materias en las que está inscripto
+    public List<Materia> verMateriasInscriptas(Alumno a){
+        ArrayList<Materia> materias = new ArrayList();
+        
+        try{
+            String sql = "SELECT * FROM cursada WHERE idAlumno = ? ;";
+            
+            PreparedStatement ps = con.prepareStatement(sql);            
+            ps.setInt(1, a.getId());
+            
+            ResultSet rs = ps.executeQuery();
+            
+            if (!rs.next()) {
+                JOptionPane.showMessageDialog(null, a.getNombre() + " no está inscripto en ninguna materia.");
+            }
+            rs.previous();  
+            
+            Materia mat;
+            
+            while(rs.next()){
+                mat = matData.obtenerMateria(rs.getInt("idMateria"));
+                                
+                materias.add(mat);
+            }
+                        
+            ps.close();
+            
+        } catch(SQLException e){
+            JOptionPane.showMessageDialog(null, "Error al obtener las materias: " + e.getMessage());
+        }
+        
+        return materias;
+    } 
+    
     //Dada una materia nos devuelva los alumnos inscriptos en ella.
     public ArrayList<Alumno> alumnosConMateria(int id) {
 

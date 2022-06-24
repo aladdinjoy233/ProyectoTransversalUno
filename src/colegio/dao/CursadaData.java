@@ -24,7 +24,40 @@ public class CursadaData {
     }
 
 //  Metodos
+    public boolean existeCursada(Cursada cursada) {
+    boolean existe = false;
+
+    String sql = "SELECT * FROM cursada WHERE idMateria = ? AND idAlumno = ? ;";
+
+    try {
+
+      PreparedStatement ps = con.prepareStatement(sql);
+
+      ps.setInt(1, cursada.getMateria().getId());
+      ps.setInt(2, cursada.getAlumno().getId());
+
+      ResultSet rs = ps.executeQuery();
+
+      if (rs.next() && cursada.getMateria().getId() == rs.getInt("idMateria") && cursada.getAlumno().getId() == rs.getInt("idAlumno")) {
+        existe = true;
+      }
+
+      ps.close();
+
+    } catch (SQLException ex) {
+      JOptionPane.showMessageDialog(null, "Error al comparar cursadas " + ex);
+    }
+
+    return existe;
+  }
+    
     public boolean guardarCursada(Cursada cursada) {
+        
+        if (existeCursada(cursada)) {
+         JOptionPane.showMessageDialog(null, cursada.getAlumno().getNombre() + " ya está inscripto en " + cursada.getMateria().getNombre());
+            return false;
+        }
+        
         boolean guardado = false;
 
         String sql = "INSERT INTO cursada (idAlumno, idMateria, nota) VALUES (?, ?, ?)";

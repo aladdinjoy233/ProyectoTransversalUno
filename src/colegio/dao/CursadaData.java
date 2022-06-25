@@ -181,6 +181,35 @@ public class CursadaData {
         return materias;
     } 
     
+    //Dado un alumno nos devuelva las materias en las que NO está inscripto.
+    public ArrayList<Materia> verMateriasNoInscriptas(int idAlumno){
+        ArrayList<Materia> materias = new ArrayList();
+        
+        try{
+            materias = matData.obtenerMaterias();
+            
+            String sql = "SELECT * FROM cursada WHERE idAlumno = ?;";
+            
+            PreparedStatement ps = con.prepareStatement(sql);
+            ps.setInt(1, idAlumno);
+            
+            ResultSet rs = ps.executeQuery();
+            
+            Materia m;
+            
+            while(rs.next()){
+                m = matData.obtenerMateria(rs.getInt("idMateria"));
+                materias.remove(m);
+            }          
+            ps.close();
+            
+        }catch(SQLException ex){
+            JOptionPane.showMessageDialog(null, "Error al obtener las materias: " + ex.getMessage());
+        }
+        
+        return materias;
+    }
+    
     //Dada una materia nos devuelva los alumnos inscriptos en ella.
     public ArrayList<Alumno> alumnosConMateria(int id) {
 

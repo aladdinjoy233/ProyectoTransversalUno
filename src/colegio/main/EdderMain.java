@@ -9,6 +9,13 @@ public class EdderMain {
 
   public static void main(String[] args) {
     
+      Conexion c = new Conexion();
+      AlumnoData ad = new AlumnoData(c);
+      MateriaData md = new MateriaData(c);
+      CursadaData cd = new CursadaData(c);
+      
+      md.borrarMateria(3);
+      
   }
   
 }

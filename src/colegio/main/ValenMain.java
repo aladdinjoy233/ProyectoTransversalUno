@@ -23,7 +23,7 @@ public class ValenMain {
         
 //--------------------------- muestro alumnos inscriptos a dicha materia ---------------------------------
         
-        ArrayList<Alumno> alumnosInscriptos = cd.alumnosConMateria(1);
+        ArrayList<Alumno> alumnosInscriptos = cd.alumnosConMateria(2);
 
         Alumno alum = new Alumno();
         

@@ -10,187 +10,210 @@ import javax.swing.JOptionPane;
 public class MateriaData {
 //  Atributos
 
-  private Connection con = null;
+    private Connection con = null;
 
 // Constructor
-  public MateriaData(Conexion conexion) {
-    con = conexion.getConexion();
-  }
+    public MateriaData(Conexion conexion) {
+        con = conexion.getConexion();
+    }
 
 // Metodos 
-  public boolean existeMateria(Materia materia) {
-    boolean existe = false;
+    public boolean existeMateria(Materia materia) {
+        boolean existe = false;
 
-    String sql = "SELECT * FROM materia WHERE nombre = ? AND anio = ?";
+        String sql = "SELECT * FROM materia WHERE nombre = ? AND anio = ?";
 
-    try {
+        try {
 
-      PreparedStatement ps = con.prepareStatement(sql);
+            PreparedStatement ps = con.prepareStatement(sql);
 
-      ps.setString(1, materia.getNombre());
-      ps.setInt(2, materia.getAnio());
+            ps.setString(1, materia.getNombre());
+            ps.setInt(2, materia.getAnio());
 
-      ResultSet rs = ps.executeQuery();
+            ResultSet rs = ps.executeQuery();
 
-      if (rs.next() && materia.getNombre().equalsIgnoreCase(rs.getString("nombre")) && materia.getAnio() == rs.getInt("anio")) {
-        existe = true;
-      }
+            if (rs.next() && materia.getNombre().equalsIgnoreCase(rs.getString("nombre")) && materia.getAnio() == rs.getInt("anio")) {
+                existe = true;
+            }
 
-      ps.close();
+            ps.close();
 
-    } catch (SQLException ex) {
-      JOptionPane.showMessageDialog(null, "Error al comparar materias" + ex);
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Error al comparar materias" + ex);
+        }
+
+        return existe;
     }
 
-    return existe;
-  }
+    public boolean agregarMateria(Materia materia) {
 
-  public boolean agregarMateria(Materia materia) {
+        if (existeMateria(materia)) {
+            JOptionPane.showMessageDialog(null, "Ya existe la materia");
+            return false;
+        }
 
-    if (existeMateria(materia)) {
-      JOptionPane.showMessageDialog(null, "Ya existe la materia");
-      return false;
+        boolean insert = true;
+
+        String sql = "INSERT INTO materia (nombre, anio, activo) VALUES (?, ?, ?)";
+
+        try {
+            PreparedStatement ps = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+            ps.setString(1, materia.getNombre());
+            ps.setInt(2, materia.getAnio());
+            ps.setBoolean(3, materia.isActivo());
+
+            ps.executeUpdate();
+            ResultSet rs = ps.getGeneratedKeys();
+
+            if (rs.next()) {
+                materia.setId(rs.getInt(1));
+            } else {
+                insert = false;
+            }
+
+            ps.close();
+
+        } catch (SQLException ex) {
+            insert = false;
+            JOptionPane.showMessageDialog(null, "Error al cargar materia");
+        }
+
+        return insert;
     }
 
-    boolean insert = true;
+    public ArrayList<Materia> obtenerMaterias() {
+        ArrayList<Materia> materias = new ArrayList<>();
 
-    String sql = "INSERT INTO materia (nombre, anio, activo) VALUES (?, ?, ?)";
+        String sql = "SELECT * FROM materia WHERE activo = 1";
 
-    try {
-      PreparedStatement ps = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
-      ps.setString(1, materia.getNombre());
-      ps.setInt(2, materia.getAnio());
-      ps.setBoolean(3, materia.isActivo());
+        try {
 
-      ps.executeUpdate();
-      ResultSet rs = ps.getGeneratedKeys();
+            PreparedStatement ps = con.prepareStatement(sql);
 
-      if (rs.next()) {
-        materia.setId(rs.getInt(1));
-      } else {
-        insert = false;
-      }
+            ResultSet rs = ps.executeQuery();
+            Materia materia;
 
-      ps.close();
+            while (rs.next()) {
+                materia = new Materia();
 
-    } catch (SQLException ex) {
-      insert = false;
-      JOptionPane.showMessageDialog(null, "Error al cargar materia");
+                materia.setId(rs.getInt("id"));
+                materia.setNombre(rs.getString("nombre"));
+                materia.setAnio(rs.getInt("anio"));
+                materia.setActivo(rs.getBoolean("activo"));
+
+                materias.add(materia);
+
+            }
+            
+            ps.close();
+
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Error al obtener materias");
+        }
+
+        return materias;
     }
 
-    return insert;
-  }
+    public Materia obtenerMateria(int id) {
+        Materia materia = new Materia();
 
-  public ArrayList<Materia> obtenerMaterias() {
-    ArrayList<Materia> materias = new ArrayList<>();
+        String sql = "SELECT * FROM materia WHERE id = ?";
 
-    String sql = "SELECT * FROM materia WHERE activo = 1";
+        try {
 
-    try {
+            PreparedStatement ps = con.prepareStatement(sql);
 
-      PreparedStatement ps = con.prepareStatement(sql);
+            ps.setInt(1, id);
 
-      ResultSet rs = ps.executeQuery();
-      Materia materia;
+            ResultSet rs = ps.executeQuery();
 
-      while (rs.next()) {
-        materia = new Materia();
+            if (rs.next()) {
+                materia.setId(rs.getInt("id"));
+                materia.setNombre(rs.getString("nombre"));
+                materia.setAnio(rs.getInt("anio"));
+                materia.setActivo(rs.getBoolean("activo"));
+            }
 
-        materia.setId(rs.getInt("id"));
-        materia.setNombre(rs.getString("nombre"));
-        materia.setAnio(rs.getInt("anio"));
-        materia.setActivo(rs.getBoolean("activo"));
+            ps.close();
 
-        materias.add(materia);
-      }
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Error al obtener materia" + ex);
+        }
 
-      ps.close();
-
-    } catch (SQLException ex) {
-      JOptionPane.showMessageDialog(null, "Error al obtener materias");
+        return materia;
     }
 
-    return materias;
-  }
+    public boolean desactivarMaterias(int id) {
+        boolean borrado = false;
 
-  public Materia obtenerMateria(int id) {
-    Materia materia = new Materia();
+        String sql = "UPDATE materia SET activo = 0 WHERE id = ?";
 
-    String sql = "SELECT * FROM materia WHERE id = ?";
+        try {
 
-    try {
+            PreparedStatement ps = con.prepareStatement(sql);
 
-      PreparedStatement ps = con.prepareStatement(sql);
+            ps.setInt(1, id);
 
-      ps.setInt(1, id);
+            if (ps.executeUpdate() != 0) {
+                borrado = true;
+            }
 
-      ResultSet rs = ps.executeQuery();
+            ps.close();
 
-      if (rs.next()) {
-        materia.setId(rs.getInt("id"));
-        materia.setNombre(rs.getString("nombre"));
-        materia.setAnio(rs.getInt("anio"));
-        materia.setActivo(rs.getBoolean("activo"));
-      }
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Error al obtener materia" + ex);
+        }
 
-      ps.close();
-
-    } catch (SQLException ex) {
-      JOptionPane.showMessageDialog(null, "Error al obtener materia" + ex);
+        return borrado;
     }
 
-    return materia;
-  }
+    public boolean modificarMateria(Materia materia) {
+        boolean modificado = false;
 
-  public boolean desactivarMaterias(int id) {
-    boolean borrado = false;
+        String sql = "UPDATE materia SET nombre = ?, anio = ?, activo = ? WHERE id = ?";
 
-    String sql = "UPDATE materia SET activo = 0 WHERE id = ?";
+        try {
 
-    try {
+            PreparedStatement ps = con.prepareStatement(sql);
 
-      PreparedStatement ps = con.prepareStatement(sql);
+            ps.setString(1, materia.getNombre());
+            ps.setInt(2, materia.getAnio());
+            ps.setBoolean(3, materia.isActivo());
+            ps.setInt(4, materia.getId());
 
-      ps.setInt(1, id);
+            if (ps.executeUpdate() != 0) {
+                modificado = true;
+            }
 
-      if (ps.executeUpdate() != 0) {
-        borrado = true;
-      }
+            ps.close();
 
-      ps.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(MateriaData.class.getName()).log(Level.SEVERE, null, ex);
+        }
 
-    } catch (SQLException ex) {
-      JOptionPane.showMessageDialog(null, "Error al obtener materia" + ex);
+        return modificado;
     }
 
-    return borrado;
-  }
+    //Borrar una Materia (delete)
+    public void borrarMateria(int id) {
 
-  public boolean modificarMateria(Materia materia) {
-    boolean modificado = false;
+        String sql = "DELETE FROM materia WHERE `materia`.`id` = ?";
 
-    String sql = "UPDATE materia SET nombre = ?, anio = ?, activo = ? WHERE id = ?";
+        try {
+            PreparedStatement ps = con.prepareStatement(sql);
+            ps.setInt(1, id);
 
-    try {
+            ps.executeUpdate();
+            JOptionPane.showMessageDialog(null, "La materia a sido eliminada");
+            ps.close();
+        } catch (SQLException ex) {
+            if (ex instanceof java.sql.SQLIntegrityConstraintViolationException) {
+                JOptionPane.showMessageDialog(null, "No se puede borrar porque la Materia esta asignada a uno o mas Alumnos.");
+            } else {
+                JOptionPane.showMessageDialog(null, "Error al borrar una Materia." + ex);
+            }
+        }
 
-      PreparedStatement ps = con.prepareStatement(sql);
-
-      ps.setString(1, materia.getNombre());
-      ps.setInt(2, materia.getAnio());
-      ps.setBoolean(3, materia.isActivo());
-      ps.setInt(4, materia.getId());
-
-      if (ps.executeUpdate() != 0) {
-        modificado = true;
-      }
-
-      ps.close();
-
-    } catch (SQLException ex) {
-      Logger.getLogger(MateriaData.class.getName()).log(Level.SEVERE, null, ex);
     }
-
-    return modificado;
-  }
 
 }

@@ -256,11 +256,18 @@ public class CursadaData {
 
         return alumnosConMateria;
     }
-
+  
+ 
+    
+    
 }
 
 //Funcionalidades que faltarían:
-//Borrar una cursada (delete)
+//Borrar una cursada (delete): Al ser una Materia la q se borra, 
+                             //el codigo lo escribi en la tabla de MateriaData.java
+                             //Bajo el Nombre de borrarMateria(int id)  
+                             //y desde el main la invocas con el elemento md.borrarMateria(#)
+                             //donde: # es el ID de la Materia a Borrar.
 //Dado un alumno nos devuelva las materias en las que está inscripto
 //Dado un alumno nos devuelva las materias en las que NO está inscripto
 //Dada una materia nos devuelva los alumnos inscriptos en ella.

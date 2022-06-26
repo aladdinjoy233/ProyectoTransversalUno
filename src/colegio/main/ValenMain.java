@@ -20,24 +20,19 @@ public class ValenMain {
         Materia mat = md.obtenerMateria(2);
         Cursada curs = new Cursada(alum, mat, 1);
         cd.guardarCursada(curs);//Guardar en la BD la nota*/
-        
 //--------------------------- muestro alumnos inscriptos a dicha materia ---------------------------------
-        
         ArrayList<Alumno> alumnosInscriptos = cd.alumnosConMateria(2);
 
-        Alumno alum = new Alumno();
-        
         for (Alumno alumno : alumnosInscriptos) {
-            
-            alum = ad.obtenerAlumno(alumno.getId());
-            
-            System.out.println("id:" + alum.getId());
-            System.out.println(alum.getNombre() + " " + alum.getApellido());
-            System.out.println(alum.getDni());
-            System.out.println(alum.getFechNac());
-            System.out.println(alum.isActivo());               
-            
+
+            System.out.println("-----------------");
+            System.out.println("id:" + alumno.getId());
+            System.out.println(alumno.getNombre() + " " + alumno.getApellido());
+            System.out.println(alumno.getDni());
+            System.out.println(alumno.getFechNac());
+            System.out.println(alumno.isActivo());
+
         }
     }
-
 }
+

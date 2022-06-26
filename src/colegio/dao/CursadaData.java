@@ -211,21 +211,20 @@ public class CursadaData {
     }
     
     //Dada una materia nos devuelva los alumnos inscriptos en ella.
-    public ArrayList<Alumno> alumnosConMateria(int id) {
+ public ArrayList<Alumno> alumnosConMateria(int id) {
 
         ArrayList<Alumno> alumnosConMateria = new ArrayList();
-
+        
         String sql = "SELECT * FROM cursada WHERE idMateria = ? ";
 
         try {
             PreparedStatement ps = con.prepareStatement(sql);
-
+            
             ps.setInt(1, id);
-
             ResultSet rs = ps.executeQuery();
 
-            Alumno alumno;
-
+            Alumno alum = new Alumno();
+            
             if (!rs.next()) {
                 JOptionPane.showMessageDialog(null, "No hay alumnos anotados");
                 ps.close();
@@ -233,19 +232,12 @@ public class CursadaData {
             }
 
             rs.previous();
-
+            
             while (rs.next()) {
-                alumno = new Alumno();
-
-                alumno.setId(rs.getInt("idAlumno"));
-
-//                alumno.setNombre(rs.getString("nombre"));
-//                alumno.setApellido(rs.getString("apellido"));
-//                alumno.setFechNac(rs.getDate("fechNac").toLocalDate());
-//                alumno.setDni(rs.getLong("dni"));
-//                alumno.setActivo(rs.getBoolean("activo"));
-
-                alumnosConMateria.add(alumno);
+                
+            alum = new Alumno();
+            alum = alumData.obtenerAlumno(rs.getInt("idAlumno"));   
+            alumnosConMateria.add(alum);         
             }
 
             ps.close();
@@ -253,13 +245,10 @@ public class CursadaData {
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "Error al obtener alumnos inscriptos " + ex);
         }
-
+        
         return alumnosConMateria;
     }
-  
  
-    
-    
 }
 
 //Funcionalidades que faltarían:

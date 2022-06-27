@@ -249,14 +249,27 @@ public class CursadaData {
         return alumnosConMateria;
     }
  
+  //Borrar una cursada
+    public void borrarCursada(int id){
+        String sql = "DELETE FROM cursada WHERE id = ?";
+        
+        try {
+            PreparedStatement ps = con.prepareStatement(sql);
+            
+            ps.setInt(1, id);
+            ps.executeUpdate();
+            
+            JOptionPane.showMessageDialog(null, "La Cursada a sido eliminada");
+            
+            ps.close();
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Error al Borrar Materias " + ex);
+        }
+    }
 }
 
 //Funcionalidades que faltarían:
-//Borrar una cursada (delete): Al ser una Materia la q se borra, 
-                             //el codigo lo escribi en la tabla de MateriaData.java
-                             //Bajo el Nombre de borrarMateria(int id)  
-                             //y desde el main la invocas con el elemento md.borrarMateria(#)
-                             //donde: # es el ID de la Materia a Borrar.
+//Borrar una cursada 
 //Dado un alumno nos devuelva las materias en las que está inscripto
 //Dado un alumno nos devuelva las materias en las que NO está inscripto
 //Dada una materia nos devuelva los alumnos inscriptos en ella.

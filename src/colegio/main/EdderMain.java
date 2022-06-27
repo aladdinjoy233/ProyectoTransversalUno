@@ -1,4 +1,3 @@
-package colegio.main;
 
 import colegio.dao.*;
 import colegio.entidades.*;
@@ -14,8 +13,14 @@ public class EdderMain {
       MateriaData md = new MateriaData(c);
       CursadaData cd = new CursadaData(c);
       
-      md.borrarMateria(3);
-      
+      Alumno a = ad.obtenerAlumno(8);
+      //Mostrar Materias Inscripto
+      List <Materia> listMat = cd.verMateriasInscriptas(a);
+      for (Materia aux : listMat) {
+          System.out.println(aux);
+      }
+      cd.borrarCursada(20);
+    
   }
   
 }

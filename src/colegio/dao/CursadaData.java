@@ -211,7 +211,7 @@ public class CursadaData {
     }
     
     //Dada una materia nos devuelva los alumnos inscriptos en ella.
- public ArrayList<Alumno> alumnosConMateria(int id) {
+ public ArrayList<Alumno> alumnosConMateria(Materia mat) {
 
         ArrayList<Alumno> alumnosConMateria = new ArrayList();
         
@@ -220,7 +220,7 @@ public class CursadaData {
         try {
             PreparedStatement ps = con.prepareStatement(sql);
             
-            ps.setInt(1, id);
+            ps.setInt(1, mat.getId());
             ResultSet rs = ps.executeQuery();
 
             Alumno alum = new Alumno();

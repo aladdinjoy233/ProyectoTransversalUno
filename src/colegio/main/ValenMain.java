@@ -21,7 +21,10 @@ public class ValenMain {
         Cursada curs = new Cursada(alum, mat, 1);
         cd.guardarCursada(curs);//Guardar en la BD la nota*/
 //--------------------------- muestro alumnos inscriptos a dicha materia ---------------------------------
-        ArrayList<Alumno> alumnosInscriptos = cd.alumnosConMateria(2);
+
+        Materia materia = md.obtenerMateria(2);
+
+        ArrayList<Alumno> alumnosInscriptos = cd.alumnosConMateria(materia);
 
         for (Alumno alumno : alumnosInscriptos) {
 

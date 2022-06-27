@@ -24,7 +24,9 @@ public class GrupoMain {
     materias.forEach(materia -> System.out.println(materia));
     
 //    Mostrar alumnos de una materia
-    List<Alumno> alumnos = cd.alumnosConMateria(1);
+    
+    Materia materia = md.obtenerMateria(1);
+    List<Alumno> alumnos = cd.alumnosConMateria(materia);
     
     System.out.println("====== Alumnos que cursan ingles ======");
     alumnos.forEach(alumno -> System.out.println(alumno));

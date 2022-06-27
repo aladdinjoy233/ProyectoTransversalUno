@@ -1,3 +1,4 @@
+package colegio.main;
 
 import colegio.dao.*;
 import colegio.entidades.*;
@@ -19,7 +20,7 @@ public class EdderMain {
       for (Materia aux : listMat) {
           System.out.println(aux);
       }
-      cd.borrarCursada(20);
+      cd.borrarCursada(21);
     
   }
   

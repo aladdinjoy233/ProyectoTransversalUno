@@ -11,7 +11,7 @@ public class ValeriaMain {
       
         Conexion con = new Conexion();  
         CursadaData cd = new CursadaData(con);
-        AlumnoData ad = new AlumnoData(c);
+        AlumnoData ad = new AlumnoData(con);
         
         Alumno alumno = ad.obtenerAlumno(6);
         

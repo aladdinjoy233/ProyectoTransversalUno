@@ -250,21 +250,24 @@ public class CursadaData {
     }
  
   //Borrar una cursada
-    public void borrarCursada(int id){
+    public boolean borrarCursada(int id){
+        boolean resultado = false;
         String sql = "DELETE FROM cursada WHERE id = ?";
         
         try {
             PreparedStatement ps = con.prepareStatement(sql);
             
             ps.setInt(1, id);
-            ps.executeUpdate();
             
-            JOptionPane.showMessageDialog(null, "La Cursada a sido eliminada");
-            
+            if(ps.executeUpdate() !=0){
+                resultado = true;
+                JOptionPane.showMessageDialog(null, "La Cursada a sido eliminada");
+            }
             ps.close();
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "Error al Borrar Materias " + ex);
         }
+        return resultado;
     }
 }
 

@@ -182,7 +182,7 @@ public class CursadaData {
     } 
     
     //Dado un alumno nos devuelva las materias en las que NO está inscripto.
-    public ArrayList<Materia> verMateriasNoInscriptas(int idAlumno){
+    public ArrayList<Materia> verMateriasNoInscriptas(Alumno alumno){
         ArrayList<Materia> materias = new ArrayList();
         
         try{
@@ -191,7 +191,7 @@ public class CursadaData {
             String sql = "SELECT * FROM cursada WHERE idAlumno = ?;";
             
             PreparedStatement ps = con.prepareStatement(sql);
-            ps.setInt(1, idAlumno);
+            ps.setInt(1, alumno.getId());
             
             ResultSet rs = ps.executeQuery();
             

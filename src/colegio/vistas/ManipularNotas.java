@@ -1,21 +1,19 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package colegio.vistas;
 
-/**
- *
- * @author ninja
- */
+import colegio.dao.*;
+import colegio.entidades.*;
+import java.util.*;
+import javax.swing.JOptionPane;
+
 public class ManipularNotas extends javax.swing.JInternalFrame {
 
-  /**
-   * Creates new form ManipularNotas
-   */
   public ManipularNotas() {
     initComponents();
+
+    alumData = new AlumnoData(con);
+    matData = new MateriaData(con);
+
+    cargarDatos();
   }
 
   /**
@@ -39,8 +37,6 @@ public class ManipularNotas extends javax.swing.JInternalFrame {
     lblTitulo.setText("Carga de notas");
 
     lblAlumno.setText("Alumno:");
-
-    cmboAlumnos.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Alumno 1", "Alumno 2", "Alumno 3", "Alumno 4" }));
 
     jTable1.setModel(new javax.swing.table.DefaultTableModel(
       new Object [][] {
@@ -118,4 +114,21 @@ public class ManipularNotas extends javax.swing.JInternalFrame {
   private javax.swing.JLabel lblAlumno;
   private javax.swing.JLabel lblTitulo;
   // End of variables declaration//GEN-END:variables
+
+  private Conexion con = new Conexion();
+  private AlumnoData alumData;
+  private MateriaData matData;
+
+  private void cargarDatos() {
+
+    ArrayList<Alumno> alumnos = alumData.obtenerAlumnos();
+
+    alumnos.forEach(alumno -> {
+      cmboAlumnos.addItem(alumno.getNombre() + " " + alumno.getApellido());
+    });
+
+    System.out.println(cmboAlumnos.getSelectedItem());
+
+  }
+
 }

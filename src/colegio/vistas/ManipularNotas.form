@@ -85,12 +85,7 @@
     <Component class="javax.swing.JComboBox" name="cmboAlumnos">
       <Properties>
         <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-          <StringArray count="4">
-            <StringItem index="0" value="Alumno 1"/>
-            <StringItem index="1" value="Alumno 2"/>
-            <StringItem index="2" value="Alumno 3"/>
-            <StringItem index="3" value="Alumno 4"/>
-          </StringArray>
+          <StringArray count="0"/>
         </Property>
       </Properties>
       <AuxValues>

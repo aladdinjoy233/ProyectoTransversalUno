@@ -44,11 +44,11 @@ public class menuAlumnos extends javax.swing.JInternalFrame {
         mAlabelNombre = new javax.swing.JLabel();
         mAestado = new javax.swing.JCheckBox();
         mAlabelFecha = new javax.swing.JLabel();
-        mAcalendario = new com.toedter.calendar.JDateChooser();
         mAbtnGuardar = new javax.swing.JButton();
         mAbtnBorrar = new javax.swing.JButton();
         mABtnActualizar = new javax.swing.JButton();
         mAbtnLimpiar = new javax.swing.JButton();
+        mACalendario = new com.toedter.calendar.JDateChooser();
 
         setClosable(true);
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
@@ -150,7 +150,7 @@ public class menuAlumnos extends javax.swing.JInternalFrame {
                         .addGap(24, 24, 24)
                         .addComponent(mAlabelFecha)
                         .addGap(18, 18, 18)
-                        .addComponent(mAcalendario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(mACalendario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(49, 49, 49)
                         .addComponent(mAbtnGuardar)
@@ -187,12 +187,12 @@ public class menuAlumnos extends javax.swing.JInternalFrame {
                         .addComponent(mAnombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(mAlabelNombre, javax.swing.GroupLayout.Alignment.TRAILING))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(mAlabelFecha, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(mAcalendario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(mACalendario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(24, 24, 24)
                 .addComponent(mAestado)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 84, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 88, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(mAbtnGuardar)
                     .addComponent(mAbtnBorrar)
@@ -258,13 +258,13 @@ public class menuAlumnos extends javax.swing.JInternalFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton mABtnActualizar;
+    private com.toedter.calendar.JDateChooser mACalendario;
     private javax.swing.JTextField mADni;
     private javax.swing.JTextField mAapellido;
     private javax.swing.JButton mAbtnBorrar;
     private javax.swing.JButton mAbtnBuscar;
     private javax.swing.JButton mAbtnGuardar;
     private javax.swing.JButton mAbtnLimpiar;
-    private com.toedter.calendar.JDateChooser mAcalendario;
     private javax.swing.JCheckBox mAestado;
     private javax.swing.JTextField mAid;
     private javax.swing.JLabel mAlabelApellido;

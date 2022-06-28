@@ -73,7 +73,7 @@
                       <EmptySpace min="-2" pref="24" max="-2" attributes="0"/>
                       <Component id="mAlabelFecha" min="-2" max="-2" attributes="0"/>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
-                      <Component id="mAcalendario" min="-2" max="-2" attributes="0"/>
+                      <Component id="mACalendario" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <Group type="102" alignment="0" attributes="0">
                       <EmptySpace min="-2" pref="49" max="-2" attributes="0"/>
@@ -121,13 +121,13 @@
                   <Component id="mAlabelNombre" alignment="1" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace type="unrelated" max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="1" attributes="0">
+              <Group type="103" groupAlignment="0" attributes="0">
                   <Component id="mAlabelFecha" min="-2" pref="22" max="-2" attributes="0"/>
-                  <Component id="mAcalendario" min="-2" max="-2" attributes="0"/>
+                  <Component id="mACalendario" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace min="-2" pref="24" max="-2" attributes="0"/>
               <Component id="mAestado" min="-2" max="-2" attributes="0"/>
-              <EmptySpace pref="84" max="32767" attributes="0"/>
+              <EmptySpace pref="88" max="32767" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="mAbtnGuardar" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="mAbtnBorrar" alignment="3" min="-2" max="-2" attributes="0"/>
@@ -218,8 +218,6 @@
         <Property name="text" type="java.lang.String" value="Fecha de Nac."/>
       </Properties>
     </Component>
-    <Component class="com.toedter.calendar.JDateChooser" name="mAcalendario">
-    </Component>
     <Component class="javax.swing.JButton" name="mAbtnGuardar">
       <Properties>
         <Property name="text" type="java.lang.String" value="Guardar"/>
@@ -242,6 +240,8 @@
       <Properties>
         <Property name="text" type="java.lang.String" value="Limpiar"/>
       </Properties>
+    </Component>
+    <Component class="com.toedter.calendar.JDateChooser" name="mACalendario">
     </Component>
   </SubComponents>
 </Form>

@@ -261,7 +261,7 @@ public class CursadaData {
             
             if(ps.executeUpdate() !=0){
                 resultado = true;
-                JOptionPane.showMessageDialog(null, "La Cursada a sido eliminada");
+                JOptionPane.showMessageDialog(null, "La Cursada ha sido eliminada");
             }
             ps.close();
         } catch (SQLException ex) {

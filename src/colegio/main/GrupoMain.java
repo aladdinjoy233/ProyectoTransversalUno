@@ -16,6 +16,9 @@ public class GrupoMain {
     MateriaData md = new MateriaData(c);
     CursadaData cd = new CursadaData(c);
     
+//    Borrar una cursada
+    cd.borrarCursada(1);
+    
 //    Mostrar materias de un alumno
     Alumno alum = ad.obtenerAlumno(10);
     
@@ -23,8 +26,12 @@ public class GrupoMain {
     System.out.println("====== Allan cursa estas materias ======");
     materias.forEach(materia -> System.out.println(materia));
     
-//    Mostrar alumnos de una materia
+//    Mostrar materias que el alumno NO esta cursando
+    List <Materia> materiasNoInscriptas = cd.verMateriasNoInscriptas(alum);
+    System.out.println("====== Allan no cursa estas materias ======");
+    materiasNoInscriptas.forEach(materia -> System.out.println(materia));
     
+//    Mostrar alumnos de una materia
     Materia materia = md.obtenerMateria(1);
     List<Alumno> alumnos = cd.alumnosConMateria(materia);
     

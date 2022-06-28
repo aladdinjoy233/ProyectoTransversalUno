@@ -105,6 +105,11 @@ public class Menu extends javax.swing.JFrame {
     jMenu3.setText("Carga de Notas");
 
     jMenuItem6.setText("Manipulacion de Notas");
+    jMenuItem6.addActionListener(new java.awt.event.ActionListener() {
+      public void actionPerformed(java.awt.event.ActionEvent evt) {
+        jMenuItem6ActionPerformed(evt);
+      }
+    });
     jMenu3.add(jMenuItem6);
 
     jMenuBar1.add(jMenu3);
@@ -138,12 +143,21 @@ public class Menu extends javax.swing.JFrame {
   }// </editor-fold>//GEN-END:initComponents
 
     private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
-    // TODO add your handling code here:
+    dispose();
     }//GEN-LAST:event_jMenuItem1ActionPerformed
 
     private void jMenuItem7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem7ActionPerformed
     // TODO add your handling code here:
     }//GEN-LAST:event_jMenuItem7ActionPerformed
+
+  private void jMenuItem6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem6ActionPerformed
+    escritorio.removeAll();
+    ManipularNotas manipNotas = new ManipularNotas();
+    manipNotas.setVisible(true);
+    escritorio.add(manipNotas);
+    escritorio.moveToFront(manipNotas);
+    escritorio.repaint();
+  }//GEN-LAST:event_jMenuItem6ActionPerformed
 
   /**
    * @param args the command line arguments

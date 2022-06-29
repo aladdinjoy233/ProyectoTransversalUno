@@ -7,6 +7,10 @@ package colegio.vistas;
 
 import colegio.dao.AlumnoData;
 import colegio.dao.Conexion;
+import colegio.entidades.Alumno;
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -15,12 +19,17 @@ import java.util.logging.Logger;
  * @author edder
  */
 public class menuAlumnos extends javax.swing.JInternalFrame {
+    private AlumnoData alumnoData;
+    private Conexion coneccion;
    
     /**
      * Creates new form menuAlumnos
      */
     public menuAlumnos() {
         initComponents();
+        coneccion = new Conexion();
+        alumnoData = new AlumnoData(coneccion);
+        
     }
 
     /**
@@ -219,6 +228,17 @@ public class menuAlumnos extends javax.swing.JInternalFrame {
     private void mAbtnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mAbtnGuardarActionPerformed
         // TODO add your handling code here:
         
+        Long dni = Long.parseLong(mADni.getText());
+        String apellido = mAapellido.getText();
+        String nombre = mAnombre.getText();
+        //--------------------------Capturar la Fecha----------------------------------------//
+        SimpleDateFormat formato = new SimpleDateFormat("dd-MM-yyyy");
+        String fecha = formato.format(mACalendario.getDate());
+        LocalDate fechNac = LocalDate.parse(fecha, DateTimeFormatter.ofPattern("dd-MM-yyyy"));
+        //-----------------------------------------------------------------------------------//
+        boolean activo = mAestado.isEnabled();
+        Alumno alumno = new Alumno(nombre, apellido, fechNac, dni, activo);
+        alumnoData.agregarAlumno(alumno);
     }//GEN-LAST:event_mAbtnGuardarActionPerformed
 
     /**

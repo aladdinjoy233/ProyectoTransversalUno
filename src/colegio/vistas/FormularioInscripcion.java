@@ -99,6 +99,11 @@ public class FormularioInscripcion extends javax.swing.JInternalFrame {
         jbSalir.setBackground(new java.awt.Color(255, 255, 255));
         jbSalir.setFont(new java.awt.Font("Trebuchet MS", 0, 13)); // NOI18N
         jbSalir.setText("Salir");
+        jbSalir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbSalirActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -179,7 +184,9 @@ public class FormularioInscripcion extends javax.swing.JInternalFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jcbListaAlumnosActionPerformed
 
-    //creo el grupo de botones y agrego los botones (asi solo se puede seleccionar uno)
+    private void jbSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbSalirActionPerformed
+        dispose();
+    }//GEN-LAST:event_jbSalirActionPerformed
     
     
     // Variables declaration - do not modify//GEN-BEGIN:variables

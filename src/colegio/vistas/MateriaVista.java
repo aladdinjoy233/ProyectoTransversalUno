@@ -6,14 +6,14 @@ import colegio.dao.*;
 
 public class MateriaVista extends javax.swing.JInternalFrame {
 
-    private Conexion c = new Conexion();
-    private MateriaData md = new MateriaData(c);
+  private MateriaData md;
 
-    public MateriaVista() {
-        initComponents();
-    }
+  public MateriaVista(Conexion con) {
+    initComponents();
+    md = new MateriaData(con);
+  }
 
-    @SuppressWarnings("unchecked")
+  @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
@@ -191,74 +191,74 @@ public class MateriaVista extends javax.swing.JInternalFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void limpiarCampos() {
-        jtCodigo.setText("");
-        jtNombre.setText("");
-        jtAnio.setText("");
-        jcEstado.setSelected(false);
-    }
+  private void limpiarCampos() {
+    jtCodigo.setText("");
+    jtNombre.setText("");
+    jtAnio.setText("");
+    jcEstado.setSelected(false);
+  }
 
     private void jbGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbGuardarActionPerformed
 
-        String nombre = jtNombre.getText();
-        int anio = Integer.parseInt(jtAnio.getText());
-        boolean estado = jcEstado.isSelected();
+    String nombre = jtNombre.getText();
+    int anio = Integer.parseInt(jtAnio.getText());
+    boolean estado = jcEstado.isSelected();
 
-        Materia materia = new Materia(nombre, anio, estado);
+    Materia materia = new Materia(nombre, anio, estado);
 
-        if (md.agregarMateria(materia)) {
-            JOptionPane.showMessageDialog(this, "Materia agregada con exito");
-        }
+    if (md.agregarMateria(materia)) {
+      JOptionPane.showMessageDialog(this, "Materia agregada con exito");
+    }
 
-        jtCodigo.setText(materia.getId()+"");
-        
+    jtCodigo.setText(materia.getId() + "");
+
     }//GEN-LAST:event_jbGuardarActionPerformed
 
     private void jbBorrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbBorrarActionPerformed
 
-         String nombre = jtNombre.getText();
-        int anio = Integer.parseInt(jtAnio.getText());
-        int id = Integer.parseInt(jtCodigo.getText());
+    String nombre = jtNombre.getText();
+    int anio = Integer.parseInt(jtAnio.getText());
+    int id = Integer.parseInt(jtCodigo.getText());
 
-        Materia materia = new Materia(nombre, anio, true);
-        md.existeMateria(materia);
+    Materia materia = new Materia(nombre, anio, true);
+    md.existeMateria(materia);
 
-        if (md.existeMateria(materia) == false) {
-            JOptionPane.showMessageDialog(this, nombre + " no existe o esta inactiva");
-        } else {
-            md.borrarMateria(id);
-            JOptionPane.showMessageDialog(this, nombre + " fue borrado exitosamente");
-        }
+    if (md.existeMateria(materia) == false) {
+      JOptionPane.showMessageDialog(this, nombre + " no existe o esta inactiva");
+    } else {
+      md.borrarMateria(id);
+      JOptionPane.showMessageDialog(this, nombre + " fue borrado exitosamente");
+    }
 
     }//GEN-LAST:event_jbBorrarActionPerformed
 
     private void jbActualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbActualizarActionPerformed
 
-        String nombre = jtNombre.getText();
-        int anio = Integer.parseInt(jtAnio.getText());
-        boolean estado = jcEstado.isSelected();
-        int id = Integer.parseInt(jtCodigo.getText());
-        
-        Materia materia = new Materia(id,nombre, anio, estado);
-        
-        md.modificarMateria(materia);
-        JOptionPane.showMessageDialog(this, "materia fue actualizada");
+    String nombre = jtNombre.getText();
+    int anio = Integer.parseInt(jtAnio.getText());
+    boolean estado = jcEstado.isSelected();
+    int id = Integer.parseInt(jtCodigo.getText());
+
+    Materia materia = new Materia(id, nombre, anio, estado);
+
+    md.modificarMateria(materia);
+    JOptionPane.showMessageDialog(this, "materia fue actualizada");
 
     }//GEN-LAST:event_jbActualizarActionPerformed
 
     private void jbLimpiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbLimpiarActionPerformed
-        limpiarCampos();
+    limpiarCampos();
     }//GEN-LAST:event_jbLimpiarActionPerformed
 
     private void jbBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbBuscarActionPerformed
 
-        int id = Integer.parseInt(jtCodigo.getText());
-        Materia materia = md.obtenerMateria(id);
+    int id = Integer.parseInt(jtCodigo.getText());
+    Materia materia = md.obtenerMateria(id);
 
 //todavia queda validar si existe materia con dicho ID--
-        jtNombre.setText(materia.getNombre());
-        jtAnio.setText(String.valueOf(materia.getAnio()));
-        jcEstado.setSelected(materia.isActivo());
+    jtNombre.setText(materia.getNombre());
+    jtAnio.setText(String.valueOf(materia.getAnio()));
+    jcEstado.setSelected(materia.isActivo());
 
     }//GEN-LAST:event_jbBuscarActionPerformed
 
@@ -274,19 +274,16 @@ public class MateriaVista extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jtCodigoActionPerformed
 
     private void JbSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JbSalirActionPerformed
-        dispose();
+    dispose();
     }//GEN-LAST:event_JbSalirActionPerformed
     private void jcEstadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jcEstadoActionPerformed
-        // TODO add your handling code here:
+    // TODO add your handling code here:
     }//GEN-LAST:event_jcEstadoActionPerformed
 
     private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
-        // TODO add your handling code here:
+    // TODO add your handling code here:
     }//GEN-LAST:event_jTextField1ActionPerformed
 
-
-    
-    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton JbSalir;
     private javax.swing.JLabel jLabel1;

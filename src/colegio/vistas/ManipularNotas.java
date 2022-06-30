@@ -7,7 +7,7 @@ import javax.swing.JOptionPane;
 
 public class ManipularNotas extends javax.swing.JInternalFrame {
 
-  public ManipularNotas() {
+  public ManipularNotas(Conexion con) {
     initComponents();
 
     alumData = new AlumnoData(con);
@@ -112,7 +112,7 @@ public class ManipularNotas extends javax.swing.JInternalFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void cmboAlumnosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmboAlumnosActionPerformed
-        // TODO add your handling code here:
+    // TODO add your handling code here:
     }//GEN-LAST:event_cmboAlumnosActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -125,7 +125,6 @@ public class ManipularNotas extends javax.swing.JInternalFrame {
     private javax.swing.JLabel lblTitulo;
     // End of variables declaration//GEN-END:variables
 
-  private Conexion con = new Conexion();
   private AlumnoData alumData;
   private MateriaData matData;
 

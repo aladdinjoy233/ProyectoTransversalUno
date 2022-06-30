@@ -1,9 +1,14 @@
 package colegio.vistas;
 
+import colegio.dao.Conexion;
+
 public class Menu extends javax.swing.JFrame {
+
+  private Conexion con;
 
   public Menu() {
     initComponents();
+    con = new Conexion();
   }
 
   /**
@@ -160,17 +165,17 @@ public class Menu extends javax.swing.JFrame {
 
     private void jMenuItem7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem7ActionPerformed
     // TODO add your handling code here:
-        escritorio.removeAll();
-        escritorio.repaint();
-        AlumnosPorMaterias apm = new AlumnosPorMaterias();
-        apm.setVisible(true);
-        escritorio.add(apm);
-        escritorio.moveToFront(apm);
+    escritorio.removeAll();
+    escritorio.repaint();
+    AlumnosPorMaterias apm = new AlumnosPorMaterias(con);
+    apm.setVisible(true);
+    escritorio.add(apm);
+    escritorio.moveToFront(apm);
     }//GEN-LAST:event_jMenuItem7ActionPerformed
 
   private void jMenuItem6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem6ActionPerformed
     escritorio.removeAll();
-    ManipularNotas manipNotas = new ManipularNotas();
+    ManipularNotas manipNotas = new ManipularNotas(con);
     manipNotas.setVisible(true);
     escritorio.add(manipNotas);
     escritorio.moveToFront(manipNotas);
@@ -178,35 +183,35 @@ public class Menu extends javax.swing.JFrame {
   }//GEN-LAST:event_jMenuItem6ActionPerformed
 
     private void jMenu2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenu2ActionPerformed
-        
+
     }//GEN-LAST:event_jMenu2ActionPerformed
-  
+
     private void jMenuItem5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem5ActionPerformed
-        escritorio.removeAll();
-        FormularioInscripcion fi = new FormularioInscripcion();
-        fi.setVisible(true);
-        escritorio.add(fi);
-        escritorio.moveToFront(fi);
-        escritorio.repaint();
+    escritorio.removeAll();
+    FormularioInscripcion fi = new FormularioInscripcion(con);
+    fi.setVisible(true);
+    escritorio.add(fi);
+    escritorio.moveToFront(fi);
+    escritorio.repaint();
     }//GEN-LAST:event_jMenuItem5ActionPerformed
 
     private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
-        escritorio.removeAll();
-        MateriaVista mv = new MateriaVista();
-        mv.setVisible(true);
-        escritorio.add(mv);
-        escritorio.moveToFront(mv);
-        escritorio.repaint();
+    escritorio.removeAll();
+    MateriaVista mv = new MateriaVista(con);
+    mv.setVisible(true);
+    escritorio.add(mv);
+    escritorio.moveToFront(mv);
+    escritorio.repaint();
     }//GEN-LAST:event_jMenuItem2ActionPerformed
 
     private void jMenuItem8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem8ActionPerformed
-        // TODO add your handling code here:
-         escritorio.removeAll();
-        menuAlumnos mA = new menuAlumnos();
-        mA.setVisible(true);
-        escritorio.add(mA);
-        escritorio.moveToFront(mA);
-        escritorio.repaint();
+    // TODO add your handling code here:
+    escritorio.removeAll();
+    menuAlumnos mA = new menuAlumnos(con);
+    mA.setVisible(true);
+    escritorio.add(mA);
+    escritorio.moveToFront(mA);
+    escritorio.repaint();
     }//GEN-LAST:event_jMenuItem8ActionPerformed
 
   /**

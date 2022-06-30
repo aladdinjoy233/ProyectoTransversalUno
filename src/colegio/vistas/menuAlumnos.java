@@ -7,6 +7,10 @@ package colegio.vistas;
 
 import colegio.dao.AlumnoData;
 import colegio.dao.Conexion;
+import colegio.entidades.Alumno;
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -15,12 +19,17 @@ import java.util.logging.Logger;
  * @author edder
  */
 public class menuAlumnos extends javax.swing.JInternalFrame {
+    private AlumnoData alumnoData;
+    private Conexion coneccion;
    
     /**
      * Creates new form menuAlumnos
      */
     public menuAlumnos() {
         initComponents();
+        coneccion = new Conexion();
+        alumnoData = new AlumnoData(coneccion);
+        
     }
 
     /**
@@ -106,10 +115,25 @@ public class menuAlumnos extends javax.swing.JInternalFrame {
         });
 
         mAbtnBorrar.setText("Borrar");
+        mAbtnBorrar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mAbtnBorrarActionPerformed(evt);
+            }
+        });
 
         mABtnActualizar.setText("Actualizar");
+        mABtnActualizar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mABtnActualizarActionPerformed(evt);
+            }
+        });
 
         mAbtnLimpiar.setText("Limpiar");
+        mAbtnLimpiar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mAbtnLimpiarActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -206,6 +230,17 @@ public class menuAlumnos extends javax.swing.JInternalFrame {
 
     private void mAbtnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mAbtnBuscarActionPerformed
         // TODO add your handling code here:
+        int alumID = Integer.parseInt(mAid.getText());
+        Alumno estudiante = alumnoData.obtenerAlumno(alumID);
+        if(estudiante != null){
+            mAid.setText(estudiante.getId()+"");
+            mADni.setText(estudiante.getDni()+"");
+            mAnombre.setText(estudiante.getNombre());
+            mAapellido.setText(estudiante.getApellido());
+            //mACalendario.getDate(estudiante.getFechNac());
+            mAestado.setSelected(estudiante.isActivo());
+        }
+        
     }//GEN-LAST:event_mAbtnBuscarActionPerformed
 
     private void mAapellidoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mAapellidoActionPerformed
@@ -219,7 +254,53 @@ public class menuAlumnos extends javax.swing.JInternalFrame {
     private void mAbtnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mAbtnGuardarActionPerformed
         // TODO add your handling code here:
         
+        Long dni = Long.parseLong(mADni.getText());
+        String apellido = mAapellido.getText();
+        String nombre = mAnombre.getText();
+        //--------------------------Capturar la Fecha----------------------------------------//
+        SimpleDateFormat formato = new SimpleDateFormat("dd-MM-yyyy");
+        String fecha = formato.format(mACalendario.getDate());
+        LocalDate fechNac = LocalDate.parse(fecha, DateTimeFormatter.ofPattern("dd-MM-yyyy"));
+        //-----------------------------------------------------------------------------------//
+        boolean activo = mAestado.isEnabled();
+        Alumno alumno = new Alumno(nombre, apellido, fechNac, dni, activo);
+        alumnoData.agregarAlumno(alumno);
+        mAid.setText(alumno.getId()+"");
     }//GEN-LAST:event_mAbtnGuardarActionPerformed
+
+    private void mAbtnBorrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mAbtnBorrarActionPerformed
+        // TODO add your handling code here:
+        int alumID = Integer.parseInt(mAid.getText());
+        alumnoData.desactivarAlumnos(alumID);
+        
+    }//GEN-LAST:event_mAbtnBorrarActionPerformed
+
+    private void mABtnActualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mABtnActualizarActionPerformed
+        // TODO add your handling code here:
+        if(mAid.getText() != null){
+            Long dni = Long.parseLong(mADni.getText());
+        String apellido = mAapellido.getText();
+        String nombre = mAnombre.getText();
+        //--------------------------Capturar la Fecha----------------------------------------//
+        SimpleDateFormat formato = new SimpleDateFormat("dd-MM-yyyy");
+        String fecha = formato.format(mACalendario.getDate());
+        LocalDate fechNac = LocalDate.parse(fecha, DateTimeFormatter.ofPattern("dd-MM-yyyy"));
+        //-----------------------------------------------------------------------------------//
+        boolean activo = mAestado.isEnabled();
+        Alumno alumno = new Alumno(nombre, apellido, fechNac, dni, activo);
+        alumnoData.modificarAlumno(alumno);
+    }
+    }//GEN-LAST:event_mABtnActualizarActionPerformed
+
+    private void mAbtnLimpiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mAbtnLimpiarActionPerformed
+        // TODO add your handling code here:
+        mAid.setText("");
+        mADni.setText("");
+        mAapellido.setText("");
+        mAnombre.setText("");
+        //mACalendario.set=;
+        mAestado.setEnabled(false);
+    }//GEN-LAST:event_mAbtnLimpiarActionPerformed
 
     /**
      * @param args the command line arguments

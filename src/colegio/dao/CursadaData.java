@@ -223,7 +223,7 @@ public class CursadaData {
             ps.setInt(1, mat.getId());
             ResultSet rs = ps.executeQuery();
 
-            Alumno alum = new Alumno();
+            Alumno alum = null;
             
             if (!rs.next()) {
                 JOptionPane.showMessageDialog(null, "No hay alumnos anotados");

@@ -11,8 +11,8 @@ import colegio.entidades.Alumno;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+import java.util.Date;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -56,7 +56,7 @@ public class menuAlumnos extends javax.swing.JInternalFrame {
         mAbtnBorrar = new javax.swing.JButton();
         mABtnActualizar = new javax.swing.JButton();
         mAbtnLimpiar = new javax.swing.JButton();
-        mACalendario = new com.toedter.calendar.JDateChooser();
+        mAfechNac = new com.toedter.calendar.JDateChooser();
 
         setClosable(true);
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
@@ -97,7 +97,7 @@ public class menuAlumnos extends javax.swing.JInternalFrame {
         mAlabelNombre.setText("Nombre");
 
         mAestado.setSelected(true);
-        mAestado.setText("Estado");
+        mAestado.setText("Activo");
         mAestado.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 mAestadoActionPerformed(evt);
@@ -173,7 +173,7 @@ public class menuAlumnos extends javax.swing.JInternalFrame {
                         .addGap(24, 24, 24)
                         .addComponent(mAlabelFecha)
                         .addGap(18, 18, 18)
-                        .addComponent(mACalendario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(mAfechNac, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(49, 49, 49)
                         .addComponent(mAbtnGuardar)
@@ -212,10 +212,10 @@ public class menuAlumnos extends javax.swing.JInternalFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(mAlabelFecha, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(mACalendario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(mAfechNac, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(24, 24, 24)
                 .addComponent(mAestado)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 88, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 92, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(mAbtnGuardar)
                     .addComponent(mAbtnBorrar)
@@ -236,7 +236,7 @@ public class menuAlumnos extends javax.swing.JInternalFrame {
       mADni.setText(estudiante.getDni() + "");
       mAnombre.setText(estudiante.getNombre());
       mAapellido.setText(estudiante.getApellido());
-      //mACalendario.getDate(estudiante.getFechNac());
+      mAfechNac.setDate(java.sql.Date.valueOf(estudiante.getFechNac()));
       mAestado.setSelected(estudiante.isActivo());
     }
 
@@ -258,13 +258,14 @@ public class menuAlumnos extends javax.swing.JInternalFrame {
     String nombre = mAnombre.getText();
     //--------------------------Capturar la Fecha----------------------------------------//
     SimpleDateFormat formato = new SimpleDateFormat("dd-MM-yyyy");
-    String fecha = formato.format(mACalendario.getDate());
+    String fecha = formato.format(mAfechNac.getDate());
     LocalDate fechNac = LocalDate.parse(fecha, DateTimeFormatter.ofPattern("dd-MM-yyyy"));
     //-----------------------------------------------------------------------------------//
     boolean activo = mAestado.isEnabled();
     Alumno alumno = new Alumno(nombre, apellido, fechNac, dni, activo);
     alumnoData.agregarAlumno(alumno);
     mAid.setText(alumno.getId() + "");
+        System.out.println(alumno);
     }//GEN-LAST:event_mAbtnGuardarActionPerformed
 
     private void mAbtnBorrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mAbtnBorrarActionPerformed
@@ -282,12 +283,14 @@ public class menuAlumnos extends javax.swing.JInternalFrame {
       String nombre = mAnombre.getText();
       //--------------------------Capturar la Fecha----------------------------------------//
       SimpleDateFormat formato = new SimpleDateFormat("dd-MM-yyyy");
-      String fecha = formato.format(mACalendario.getDate());
+      String fecha = formato.format(mAfechNac.getDate());
       LocalDate fechNac = LocalDate.parse(fecha, DateTimeFormatter.ofPattern("dd-MM-yyyy"));
       //-----------------------------------------------------------------------------------//
       boolean activo = mAestado.isEnabled();
+        
       Alumno alumno = new Alumno(nombre, apellido, fechNac, dni, activo);
       alumnoData.modificarAlumno(alumno);
+        System.out.println(alumno);
     }
     }//GEN-LAST:event_mABtnActualizarActionPerformed
 
@@ -297,13 +300,12 @@ public class menuAlumnos extends javax.swing.JInternalFrame {
     mADni.setText("");
     mAapellido.setText("");
     mAnombre.setText("");
-    //mACalendario.set=;
+    //mAfechNac.setDate(new date);
     mAestado.setEnabled(false);
     }//GEN-LAST:event_mAbtnLimpiarActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton mABtnActualizar;
-    private com.toedter.calendar.JDateChooser mACalendario;
     private javax.swing.JTextField mADni;
     private javax.swing.JTextField mAapellido;
     private javax.swing.JButton mAbtnBorrar;
@@ -311,6 +313,7 @@ public class menuAlumnos extends javax.swing.JInternalFrame {
     private javax.swing.JButton mAbtnGuardar;
     private javax.swing.JButton mAbtnLimpiar;
     private javax.swing.JCheckBox mAestado;
+    private com.toedter.calendar.JDateChooser mAfechNac;
     private javax.swing.JTextField mAid;
     private javax.swing.JLabel mAlabelApellido;
     private javax.swing.JLabel mAlabelDni;

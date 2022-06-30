@@ -251,6 +251,8 @@ public class MateriaVista extends javax.swing.JInternalFrame {
     private void jbLimpiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbLimpiarActionPerformed
     limpiarCampos();
      jbGuardar.setEnabled(true);
+      jbBorrar.setEnabled(false);
+    jbActualizar.setEnabled(false);
     }//GEN-LAST:event_jbLimpiarActionPerformed
 
     private void jbBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbBuscarActionPerformed

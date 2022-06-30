@@ -62,6 +62,7 @@ public class MateriaVista extends javax.swing.JInternalFrame {
         });
 
         jbBorrar.setText("Borrar");
+        jbBorrar.setEnabled(false);
         jbBorrar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jbBorrarActionPerformed(evt);
@@ -69,6 +70,7 @@ public class MateriaVista extends javax.swing.JInternalFrame {
         });
 
         jbActualizar.setText("Actualizar");
+        jbActualizar.setEnabled(false);
         jbActualizar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jbActualizarActionPerformed(evt);
@@ -243,11 +245,12 @@ public class MateriaVista extends javax.swing.JInternalFrame {
 
     md.modificarMateria(materia);
     JOptionPane.showMessageDialog(this, "materia fue actualizada");
-
+    
     }//GEN-LAST:event_jbActualizarActionPerformed
 
     private void jbLimpiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbLimpiarActionPerformed
     limpiarCampos();
+     jbGuardar.setEnabled(true);
     }//GEN-LAST:event_jbLimpiarActionPerformed
 
     private void jbBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbBuscarActionPerformed
@@ -260,6 +263,10 @@ public class MateriaVista extends javax.swing.JInternalFrame {
     jtAnio.setText(String.valueOf(materia.getAnio()));
     jcEstado.setSelected(materia.isActivo());
 
+    jbBorrar.setEnabled(true);
+    jbActualizar.setEnabled(true);
+    jbGuardar.setEnabled(false);
+    
     }//GEN-LAST:event_jbBuscarActionPerformed
 
     private void jtAnioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtAnioActionPerformed

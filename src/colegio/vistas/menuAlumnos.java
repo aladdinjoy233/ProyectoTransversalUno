@@ -60,8 +60,6 @@ public class menuAlumnos extends javax.swing.JInternalFrame {
 
         setClosable(true);
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        setIconifiable(true);
-        setMaximizable(true);
         setResizable(true);
         setTitle("Panel de Alumnos");
 
@@ -96,7 +94,6 @@ public class menuAlumnos extends javax.swing.JInternalFrame {
 
         mAlabelNombre.setText("Nombre");
 
-        mAestado.setSelected(true);
         mAestado.setText("Activo");
         mAestado.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -265,7 +262,7 @@ public class menuAlumnos extends javax.swing.JInternalFrame {
     Alumno alumno = new Alumno(nombre, apellido, fechNac, dni, activo);
     alumnoData.agregarAlumno(alumno);
     mAid.setText(alumno.getId() + "");
-        System.out.println(alumno);
+        
     }//GEN-LAST:event_mAbtnGuardarActionPerformed
 
     private void mAbtnBorrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mAbtnBorrarActionPerformed
@@ -278,6 +275,7 @@ public class menuAlumnos extends javax.swing.JInternalFrame {
     private void mABtnActualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mABtnActualizarActionPerformed
     // TODO add your handling code here:
     if (mAid.getText() != null) {
+        int id = Integer.parseInt(mAid.getText());
       Long dni = Long.parseLong(mADni.getText());
       String apellido = mAapellido.getText();
       String nombre = mAnombre.getText();
@@ -288,9 +286,9 @@ public class menuAlumnos extends javax.swing.JInternalFrame {
       //-----------------------------------------------------------------------------------//
       boolean activo = mAestado.isEnabled();
         
-      Alumno alumno = new Alumno(nombre, apellido, fechNac, dni, activo);
+      Alumno alumno = new Alumno(id, nombre, apellido, fechNac, dni, activo);
       alumnoData.modificarAlumno(alumno);
-        System.out.println(alumno);
+       
     }
     }//GEN-LAST:event_mABtnActualizarActionPerformed
 
@@ -300,8 +298,8 @@ public class menuAlumnos extends javax.swing.JInternalFrame {
     mADni.setText("");
     mAapellido.setText("");
     mAnombre.setText("");
-    //mAfechNac.setDate(new date);
-    mAestado.setEnabled(false);
+    mAfechNac.setDate(new Date());
+    mAestado.setSelected(false);
     }//GEN-LAST:event_mAbtnLimpiarActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

@@ -74,8 +74,18 @@ public class ManipularNotas extends javax.swing.JInternalFrame {
     jScrollPane1.setViewportView(tbleMaterias);
 
     btnGuardar.setText("Guardar");
+    btnGuardar.addActionListener(new java.awt.event.ActionListener() {
+      public void actionPerformed(java.awt.event.ActionEvent evt) {
+        btnGuardarActionPerformed(evt);
+      }
+    });
 
     btnCancelar.setText("Cancelar");
+    btnCancelar.addActionListener(new java.awt.event.ActionListener() {
+      public void actionPerformed(java.awt.event.ActionEvent evt) {
+        btnCancelarActionPerformed(evt);
+      }
+    });
 
     javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
     getContentPane().setLayout(layout);
@@ -130,6 +140,23 @@ public class ManipularNotas extends javax.swing.JInternalFrame {
     actualizarDatos();
   }//GEN-LAST:event_cmboAlumnosItemStateChanged
 
+  private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
+    actualizarDatos();
+  }//GEN-LAST:event_btnCancelarActionPerformed
+
+  private void btnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarActionPerformed
+
+    Alumno alumnoSeleccionado = alumnos.get(cmboAlumnos.getSelectedIndex());
+
+    for (int i = 0; i < model.getRowCount(); i++) {
+      Materia mat = matData.obtenerMateria((Integer) model.getValueAt(i, 0));
+      double nota = (Double) model.getValueAt(i, 2);
+
+      curData.actualizarNota(alumnoSeleccionado, mat, nota);
+    }
+
+  }//GEN-LAST:event_btnGuardarActionPerformed
+
   // Variables declaration - do not modify//GEN-BEGIN:variables
   private javax.swing.JButton btnCancelar;
   private javax.swing.JButton btnGuardar;
@@ -178,6 +205,12 @@ public class ManipularNotas extends javax.swing.JInternalFrame {
       });
 
     });
+
+    if (model.getRowCount() == 0) {
+      btnGuardar.setEnabled(false);
+    } else {
+      btnGuardar.setEnabled(true);
+    }
 
   }
 

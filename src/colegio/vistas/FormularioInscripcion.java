@@ -5,6 +5,9 @@
  */
 package colegio.vistas;
 
+import colegio.dao.*;
+import colegio.entidades.*;
+import java.util.ArrayList;
 import javax.swing.*;
 
 /**
@@ -16,8 +19,15 @@ public class FormularioInscripcion extends javax.swing.JInternalFrame {
     /**
      * Creates new form FormularioInscripcion
      */
+    
+    private AlumnoData ad;
+    private Conexion c;
+    
     public FormularioInscripcion() {
         initComponents();
+        c = new Conexion();
+        ad = new AlumnoData(c);
+        llenarConAlumnos();
     }
 
     /**
@@ -188,6 +198,13 @@ public class FormularioInscripcion extends javax.swing.JInternalFrame {
         dispose();
     }//GEN-LAST:event_jbSalirActionPerformed
     
+    private void llenarConAlumnos(){
+        ArrayList<Alumno> listaAlumnos = ad.obtenerAlumnos();
+        for(Alumno a : listaAlumnos){
+            jcbListaAlumnos.addItem(a.getNombre() + " " + a.getApellido());
+        }
+        
+    }
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.ButtonGroup buttonGroup1;

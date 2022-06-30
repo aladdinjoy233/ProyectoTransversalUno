@@ -61,7 +61,7 @@ public class Materia {
 // Metodos
   @Override
   public String toString() {
-    return "== Materia ==\n" +"ID: " + id + "\nNombre: " + nombre + "\nAnio: " + anio + "\nActivo: " + activo + "\n";
+    return nombre + " - " + anio + " año" ;
   }
 
   @Override

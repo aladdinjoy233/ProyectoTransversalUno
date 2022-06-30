@@ -198,7 +198,7 @@ public class FormularioInscripcion extends javax.swing.JInternalFrame {
   private void llenarConAlumnos() {
     ArrayList<Alumno> listaAlumnos = ad.obtenerAlumnos();
     for (Alumno a : listaAlumnos) {
-      jcbListaAlumnos.addItem(a.getNombre() + " " + a.getApellido());
+      jcbListaAlumnos.addItem(a);
     }
 
   }
@@ -213,7 +213,7 @@ public class FormularioInscripcion extends javax.swing.JInternalFrame {
     private javax.swing.JButton jbAnular;
     private javax.swing.JButton jbInscribir;
     private javax.swing.JButton jbSalir;
-    private javax.swing.JComboBox<String> jcbListaAlumnos;
+    private javax.swing.JComboBox<Alumno> jcbListaAlumnos;
     private javax.swing.JRadioButton jrbInscriptas;
     private javax.swing.JRadioButton jrbNoInscriptas;
     private javax.swing.JTable tInscripcion;

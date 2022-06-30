@@ -139,7 +139,7 @@ public class AlumnosPorMaterias extends javax.swing.JInternalFrame {
 
       cbMateria.addItem(item);
     }
-
+ 
   }
 
   public void armarCabeceraTabla() {

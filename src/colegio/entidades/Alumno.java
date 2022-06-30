@@ -84,7 +84,7 @@ public class Alumno {
 // Metodos
   @Override
   public String toString() {
-    return "== Alumno ==\n" + "Nombre: " + nombre + "\nApellido: " + apellido + "\nFecha de nacimiento: " + fechNac + "\nDNI: " + dni + "\nActivo: " + activo;
+    return nombre + " " + apellido + " - " + dni ;
   }
 
   @Override

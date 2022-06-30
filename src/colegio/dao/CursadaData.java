@@ -12,19 +12,19 @@ import javax.swing.JOptionPane;
 public class CursadaData {
 // Atributos
 
-    private Connection con = null;
-    private AlumnoData alumData;
-    private MateriaData matData;
+  private Connection con = null;
+  private AlumnoData alumData;
+  private MateriaData matData;
 
 // Constructores
-    public CursadaData(Conexion conexion) {
-        con = conexion.getConexion();
-        this.alumData = new AlumnoData(conexion);
-        this.matData = new MateriaData(conexion);
-    }
+  public CursadaData(Conexion conexion) {
+    con = conexion.getConexion();
+    this.alumData = new AlumnoData(conexion);
+    this.matData = new MateriaData(conexion);
+  }
 
 //  Metodos
-    public boolean existeCursada(Cursada cursada) {
+  public boolean existeCursada(Cursada cursada) {
     boolean existe = false;
 
     String sql = "SELECT * FROM cursada WHERE idMateria = ? AND idAlumno = ? ;";
@@ -50,224 +50,259 @@ public class CursadaData {
 
     return existe;
   }
-    
-    public boolean guardarCursada(Cursada cursada) {
-        
-        if (existeCursada(cursada)) {
-         JOptionPane.showMessageDialog(null, cursada.getAlumno().getNombre() + " ya está inscripto en " + cursada.getMateria().getNombre());
-            return false;
-        }
-        
-        boolean guardado = false;
 
-        String sql = "INSERT INTO cursada (idAlumno, idMateria, nota) VALUES (?, ?, ?)";
+  public boolean guardarCursada(Cursada cursada) {
 
-        try {
-            PreparedStatement ps = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
-            ps.setInt(1, cursada.getAlumno().getId());
-            ps.setInt(2, cursada.getMateria().getId());
-            ps.setDouble(3, cursada.getNota());
-
-            ps.executeUpdate();
-
-            ResultSet rs = ps.getGeneratedKeys();
-
-            if (rs.next()) {
-                cursada.setId(rs.getInt("id"));
-                guardado = true;
-            }
-
-            ps.close();
-
-        } catch (SQLException exc) {
-            JOptionPane.showMessageDialog(null, "No se pudo agregar cursada" + exc);
-        }
-
-        return guardado;
+    if (existeCursada(cursada)) {
+      JOptionPane.showMessageDialog(null, cursada.getAlumno().getNombre() + " ya está inscripto en " + cursada.getMateria().getNombre());
+      return false;
     }
 
-    public ArrayList<Cursada> obtenerCursadas() {
-        ArrayList<Cursada> cursadas = new ArrayList<>();
+    boolean guardado = false;
 
-        String sql = "SELECT * FROM cursada";
+    String sql = "INSERT INTO cursada (idAlumno, idMateria, nota) VALUES (?, ?, ?)";
 
-        try {
-            PreparedStatement ps = con.prepareStatement(sql);
-            ResultSet rs = ps.executeQuery();
+    try {
+      PreparedStatement ps = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+      ps.setInt(1, cursada.getAlumno().getId());
+      ps.setInt(2, cursada.getMateria().getId());
+      ps.setDouble(3, cursada.getNota());
 
-            Cursada cursada;
+      ps.executeUpdate();
 
-            while (rs.next()) {
-                cursada = new Cursada();
-                cursada.setId(rs.getInt("id"));
+      ResultSet rs = ps.getGeneratedKeys();
 
-                Alumno a = alumData.obtenerAlumno(rs.getInt("idAlumno"));
-                cursada.setAlumno(a);
+      if (rs.next()) {
+        cursada.setId(rs.getInt("id"));
+        guardado = true;
+      }
 
-                Materia m = matData.obtenerMateria(rs.getInt("idMateria"));
-                cursada.setMateria(m);
+      ps.close();
 
-                cursada.setNota(rs.getDouble("nota"));
-
-                cursadas.add(cursada);
-            }
-
-            ps.close();
-
-        } catch (SQLException exc) {
-            JOptionPane.showMessageDialog(null, "No se pudo obtener cursadas " + exc);
-        }
-
-        return cursadas;
+    } catch (SQLException exc) {
+      JOptionPane.showMessageDialog(null, "No se pudo agregar cursada" + exc);
     }
 
-    public boolean actualizarNota(Alumno alum, Materia mat, double nota) {
-        boolean actualizado = false;
+    return guardado;
+  }
 
-        String sql = "UPDATE cursada SET nota = ? WHERE idAlumno = ? AND idMateria = ?";
+  public ArrayList<Cursada> obtenerCursadas() {
+    ArrayList<Cursada> cursadas = new ArrayList<>();
 
-        try {
+    String sql = "SELECT * FROM cursada";
 
-            PreparedStatement ps = con.prepareStatement(sql);
+    try {
+      PreparedStatement ps = con.prepareStatement(sql);
+      ResultSet rs = ps.executeQuery();
 
-            ps.setDouble(1, nota);
-            ps.setInt(2, alum.getId());
-            ps.setInt(3, mat.getId());
+      Cursada cursada;
 
-            if (ps.executeUpdate() != 0) {
-                actualizado = true;
-            }
+      while (rs.next()) {
+        cursada = new Cursada();
+        cursada.setId(rs.getInt("id"));
 
-            ps.close();
+        Alumno a = alumData.obtenerAlumno(rs.getInt("idAlumno"));
+        cursada.setAlumno(a);
 
-        } catch (SQLException exc) {
-            JOptionPane.showMessageDialog(null, "No se pudo actualizar la nota " + exc);
-        }
+        Materia m = matData.obtenerMateria(rs.getInt("idMateria"));
+        cursada.setMateria(m);
 
-        return actualizado;
+        cursada.setNota(rs.getDouble("nota"));
+
+        cursadas.add(cursada);
+      }
+
+      ps.close();
+
+    } catch (SQLException exc) {
+      JOptionPane.showMessageDialog(null, "No se pudo obtener cursadas " + exc);
     }
 
-    //Dado un alumno nos devuelva las materias en las que está inscripto
-    public List<Materia> verMateriasInscriptas(Alumno a){
-        ArrayList<Materia> materias = new ArrayList();
-        
-        try{
-            String sql = "SELECT * FROM cursada WHERE idAlumno = ? ;";
-            
-            PreparedStatement ps = con.prepareStatement(sql);            
-            ps.setInt(1, a.getId());
-            
-            ResultSet rs = ps.executeQuery();
-            
-            if (!rs.next()) {
-                JOptionPane.showMessageDialog(null, a.getNombre() + " no está inscripto en ninguna materia.");
-            }
-            rs.previous();  
-            
-            Materia mat;
-            
-            while(rs.next()){
-                mat = matData.obtenerMateria(rs.getInt("idMateria"));
-                                
-                materias.add(mat);
-            }
-                        
-            ps.close();
-            
-        } catch(SQLException e){
-            JOptionPane.showMessageDialog(null, "Error al obtener las materias: " + e.getMessage());
-        }
-        
-        return materias;
-    } 
-    
-    //Dado un alumno nos devuelva las materias en las que NO está inscripto.
-    public ArrayList<Materia> verMateriasNoInscriptas(Alumno alumno){
-        ArrayList<Materia> materias = new ArrayList();
-        
-        try{       
-            String sql = "SELECT * FROM materia WHERE id NOT IN (SELECT idMateria FROM cursada WHERE idAlumno = ?) AND activo = 1;";
-            
-            PreparedStatement ps = con.prepareStatement(sql);
-            ps.setInt(1, alumno.getId());
-            
-            ResultSet rs = ps.executeQuery();
-            
-            Materia m;
-            
-            while(rs.next()){
-                m = matData.obtenerMateria(rs.getInt("id"));
-                                
-                materias.add(m);
-            }          
-            ps.close();
-            
-        }catch(SQLException ex){
-            JOptionPane.showMessageDialog(null, "Error al obtener las materias: " + ex.getMessage());
-        }
-        
-        return materias;
+    return cursadas;
+  }
+
+  public boolean actualizarNota(Alumno alum, Materia mat, double nota) {
+    boolean actualizado = false;
+
+    String sql = "UPDATE cursada SET nota = ? WHERE idAlumno = ? AND idMateria = ?";
+
+    try {
+
+      PreparedStatement ps = con.prepareStatement(sql);
+
+      ps.setDouble(1, nota);
+      ps.setInt(2, alum.getId());
+      ps.setInt(3, mat.getId());
+
+      if (ps.executeUpdate() != 0) {
+        actualizado = true;
+      }
+
+      ps.close();
+
+    } catch (SQLException exc) {
+      JOptionPane.showMessageDialog(null, "No se pudo actualizar la nota " + exc);
     }
-    
-    //Dada una materia nos devuelva los alumnos inscriptos en ella.
- public ArrayList<Alumno> alumnosConMateria(Materia mat) {
 
-        ArrayList<Alumno> alumnosConMateria = new ArrayList();
-        
-        String sql = "SELECT * FROM cursada WHERE idMateria = ? ";
+    return actualizado;
+  }
 
-        try {
-            PreparedStatement ps = con.prepareStatement(sql);
-            
-            ps.setInt(1, mat.getId());
-            ResultSet rs = ps.executeQuery();
+  //Dado un alumno nos devuelva las materias en las que está inscripto
+  public List<Materia> verMateriasInscriptas(Alumno a) {
+    ArrayList<Materia> materias = new ArrayList();
 
-            Alumno alum = null;
-            
-            if (!rs.next()) {
-                JOptionPane.showMessageDialog(null, "No hay alumnos anotados");
-                ps.close();
-                return alumnosConMateria;
-            }
+    try {
+      String sql = "SELECT * FROM cursada WHERE idAlumno = ? ;";
 
-            rs.previous();
-            
-            while (rs.next()) {
-                
-            alum = new Alumno();
-            alum = alumData.obtenerAlumno(rs.getInt("idAlumno"));   
-            alumnosConMateria.add(alum);         
-            }
+      PreparedStatement ps = con.prepareStatement(sql);
+      ps.setInt(1, a.getId());
 
-            ps.close();
+      ResultSet rs = ps.executeQuery();
 
-        } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, "Error al obtener alumnos inscriptos " + ex);
-        }
-        
+      if (!rs.next()) {
+        JOptionPane.showMessageDialog(null, a.getNombre() + " no está inscripto en ninguna materia.");
+      }
+      rs.previous();
+
+      Materia mat;
+
+      while (rs.next()) {
+        mat = matData.obtenerMateria(rs.getInt("idMateria"));
+
+        materias.add(mat);
+      }
+
+      ps.close();
+
+    } catch (SQLException e) {
+      JOptionPane.showMessageDialog(null, "Error al obtener las materias: " + e.getMessage());
+    }
+
+    return materias;
+  }
+
+  //Dado un alumno nos devuelva las materias en las que NO está inscripto.
+  public ArrayList<Materia> verMateriasNoInscriptas(Alumno alumno) {
+    ArrayList<Materia> materias = new ArrayList();
+
+    try {
+      String sql = "SELECT * FROM materia WHERE id NOT IN (SELECT idMateria FROM cursada WHERE idAlumno = ?) AND activo = 1;";
+
+      PreparedStatement ps = con.prepareStatement(sql);
+      ps.setInt(1, alumno.getId());
+
+      ResultSet rs = ps.executeQuery();
+
+      Materia m;
+
+      while (rs.next()) {
+        m = matData.obtenerMateria(rs.getInt("id"));
+
+        materias.add(m);
+      }
+      ps.close();
+
+    } catch (SQLException ex) {
+      JOptionPane.showMessageDialog(null, "Error al obtener las materias: " + ex.getMessage());
+    }
+
+    return materias;
+  }
+
+  //Dada una materia nos devuelva los alumnos inscriptos en ella.
+  public ArrayList<Alumno> alumnosConMateria(Materia mat) {
+
+    ArrayList<Alumno> alumnosConMateria = new ArrayList();
+
+    String sql = "SELECT * FROM cursada WHERE idMateria = ? ";
+
+    try {
+      PreparedStatement ps = con.prepareStatement(sql);
+
+      ps.setInt(1, mat.getId());
+      ResultSet rs = ps.executeQuery();
+
+      Alumno alum = null;
+
+      if (!rs.next()) {
+        JOptionPane.showMessageDialog(null, "No hay alumnos anotados");
+        ps.close();
         return alumnosConMateria;
+      }
+
+      rs.previous();
+
+      while (rs.next()) {
+
+        alum = new Alumno();
+        alum = alumData.obtenerAlumno(rs.getInt("idAlumno"));
+        alumnosConMateria.add(alum);
+      }
+
+      ps.close();
+
+    } catch (SQLException ex) {
+      JOptionPane.showMessageDialog(null, "Error al obtener alumnos inscriptos " + ex);
     }
- 
+
+    return alumnosConMateria;
+  }
+
   //Borrar una cursada
-    public boolean borrarCursada(int id){
-        boolean resultado = false;
-        String sql = "DELETE FROM cursada WHERE id = ?";
-        
-        try {
-            PreparedStatement ps = con.prepareStatement(sql);
-            
-            ps.setInt(1, id);
-            
-            if(ps.executeUpdate() !=0){
-                resultado = true;
-                JOptionPane.showMessageDialog(null, "La Cursada ha sido eliminada");
-            }
-            ps.close();
-        } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, "Error al Borrar Materias " + ex);
-        }
-        return resultado;
+  public boolean borrarCursada(int id) {
+    boolean resultado = false;
+    String sql = "DELETE FROM cursada WHERE id = ?";
+
+    try {
+      PreparedStatement ps = con.prepareStatement(sql);
+
+      ps.setInt(1, id);
+
+      if (ps.executeUpdate() != 0) {
+        resultado = true;
+        JOptionPane.showMessageDialog(null, "La Cursada ha sido eliminada");
+      }
+      ps.close();
+    } catch (SQLException ex) {
+      JOptionPane.showMessageDialog(null, "Error al Borrar Materias " + ex);
     }
+    return resultado;
+  }
+
+  public ArrayList<Cursada> obtenerCursadasDeAlumno(Alumno alum) {
+    ArrayList<Cursada> cursadas = new ArrayList<>();
+
+    String sql = "SELECT * FROM cursada WHERE idAlumno = ?";
+
+    try {
+
+      PreparedStatement ps = con.prepareStatement(sql);
+
+      ps.setInt(1, alum.getId());
+
+      ResultSet rs = ps.executeQuery();
+
+      Cursada cursada;
+
+      while (rs.next()) {
+
+        int idCursada = rs.getInt("id");
+        Materia materia = matData.obtenerMateria(rs.getInt("idMateria"));
+        Alumno alumno = alum;
+        double nota = rs.getDouble("nota");
+
+        cursada = new Cursada(idCursada, alumno, materia, nota);
+
+        cursadas.add(cursada);
+
+      }
+
+    } catch (SQLException ex) {
+      JOptionPane.showMessageDialog(null, "Error al obtener cursadas " + ex);
+    }
+
+    return cursadas;
+  }
 }
 
 //Funcionalidades que faltarían:

@@ -13,7 +13,7 @@ public class ValeriaMain {
         CursadaData cd = new CursadaData(con);
         AlumnoData ad = new AlumnoData(con);
         
-        Alumno alumno = ad.obtenerAlumno(6);
+        Alumno alumno = ad.obtenerAlumno(4);
         
         System.out.println("~~~~~MATERIAS EN LAS QUE NO ESTA INSCRIPTO~~~~~");
         for (Object mat : cd.verMateriasNoInscriptas(alumno)) {

@@ -185,10 +185,8 @@ public class CursadaData {
     public ArrayList<Materia> verMateriasNoInscriptas(Alumno alumno){
         ArrayList<Materia> materias = new ArrayList();
         
-        try{
-            materias = matData.obtenerMaterias();
-            
-            String sql = "SELECT * FROM cursada WHERE idAlumno = ?;";
+        try{       
+            String sql = "SELECT * FROM materia WHERE id NOT IN (SELECT idMateria FROM cursada WHERE idAlumno = ?) AND activo = 1;";
             
             PreparedStatement ps = con.prepareStatement(sql);
             ps.setInt(1, alumno.getId());
@@ -198,8 +196,9 @@ public class CursadaData {
             Materia m;
             
             while(rs.next()){
-                m = matData.obtenerMateria(rs.getInt("idMateria"));
-                materias.remove(m);
+                m = matData.obtenerMateria(rs.getInt("id"));
+                                
+                materias.add(m);
             }          
             ps.close();
             

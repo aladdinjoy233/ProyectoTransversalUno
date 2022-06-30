@@ -73,7 +73,7 @@
                       <EmptySpace min="-2" pref="24" max="-2" attributes="0"/>
                       <Component id="mAlabelFecha" min="-2" max="-2" attributes="0"/>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
-                      <Component id="mACalendario" min="-2" max="-2" attributes="0"/>
+                      <Component id="mAfechNac" min="-2" pref="125" max="-2" attributes="0"/>
                   </Group>
                   <Group type="102" alignment="0" attributes="0">
                       <EmptySpace min="-2" pref="49" max="-2" attributes="0"/>
@@ -123,11 +123,11 @@
               <EmptySpace type="unrelated" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
                   <Component id="mAlabelFecha" min="-2" pref="22" max="-2" attributes="0"/>
-                  <Component id="mACalendario" min="-2" max="-2" attributes="0"/>
+                  <Component id="mAfechNac" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace min="-2" pref="24" max="-2" attributes="0"/>
               <Component id="mAestado" min="-2" max="-2" attributes="0"/>
-              <EmptySpace pref="88" max="32767" attributes="0"/>
+              <EmptySpace pref="92" max="32767" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="mAbtnGuardar" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="mAbtnBorrar" alignment="3" min="-2" max="-2" attributes="0"/>
@@ -207,7 +207,7 @@
     <Component class="javax.swing.JCheckBox" name="mAestado">
       <Properties>
         <Property name="selected" type="boolean" value="true"/>
-        <Property name="text" type="java.lang.String" value="Estado"/>
+        <Property name="text" type="java.lang.String" value="Activo"/>
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="mAestadoActionPerformed"/>
@@ -250,7 +250,7 @@
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="mAbtnLimpiarActionPerformed"/>
       </Events>
     </Component>
-    <Component class="com.toedter.calendar.JDateChooser" name="mACalendario">
+    <Component class="com.toedter.calendar.JDateChooser" name="mAfechNac">
     </Component>
   </SubComponents>
 </Form>

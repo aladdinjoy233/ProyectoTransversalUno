@@ -186,7 +186,7 @@ public class FormularioInscripcion extends javax.swing.JInternalFrame {
                                         .addGap(18, 18, 18)
                                         .addComponent(jbtAnular, javax.swing.GroupLayout.PREFERRED_SIZE, 201, javax.swing.GroupLayout.PREFERRED_SIZE))
                                     .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 417, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                        .addGap(0, 52, Short.MAX_VALUE)))
+                        .addGap(0, 23, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
@@ -276,7 +276,7 @@ public class FormularioInscripcion extends javax.swing.JInternalFrame {
             
             JOptionPane.showMessageDialog(this, "Se inscribió a " + a.getNombre() + " " + a.getApellido() + " en " + m.getNombre());
             
-            borrarFilas();
+            verNoInscriptas();
             
         } else{
             JOptionPane.showMessageDialog(this, "Seleccione una materia.");
@@ -299,7 +299,7 @@ public class FormularioInscripcion extends javax.swing.JInternalFrame {
              
              JOptionPane.showMessageDialog(this, "Se desinscribió a " + a.getNombre() + " " + a.getApellido() + " en " + nombre);
              
-             borrarFilas();
+             verInscriptas();
              
          } else{
             JOptionPane.showMessageDialog(this, "Seleccione una materia.");

@@ -303,6 +303,26 @@ public class CursadaData {
 
     return cursadas;
   }
+  
+  public boolean eliminarCursada(int idAlumno, int idMateria) {
+        boolean result = true;
+        String sql = "DELETE FROM cursada WHERE cursada.idAlumno =" + idAlumno+" and idMateria= "+idMateria;
+        try {
+            PreparedStatement ps = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+            int rs = ps.executeUpdate();
+            if (rs == 0) {
+                result = false;
+            }
+
+            ps.close();
+        } catch (SQLException ex) {
+            result = false;
+            JOptionPane.showMessageDialog(null, "Error de sintaxis\n" + ex);
+        }
+
+        return result;
+    }
+  
 }
 
 //Funcionalidades que faltarían:

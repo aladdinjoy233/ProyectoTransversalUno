@@ -31,30 +31,50 @@ public class ManipularNotas extends javax.swing.JInternalFrame {
   // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
   private void initComponents() {
 
-    lblTitulo = new javax.swing.JLabel();
-    lblAlumno = new javax.swing.JLabel();
-    cmboAlumnos = new javax.swing.JComboBox<>();
+    jScrollPane2 = new javax.swing.JScrollPane();
+    jTable1 = new javax.swing.JTable();
+    pnlFondo = new javax.swing.JPanel();
+    btnCancelar = new javax.swing.JButton();
+    btnGuardar = new javax.swing.JButton();
     jScrollPane1 = new javax.swing.JScrollPane();
     tbleMaterias = new javax.swing.JTable();
-    btnGuardar = new javax.swing.JButton();
-    btnCancelar = new javax.swing.JButton();
+    cmboAlumnos = new javax.swing.JComboBox<>();
+    lblAlumno = new javax.swing.JLabel();
+    lblTitulo = new javax.swing.JLabel();
+    btnSalir = new javax.swing.JToggleButton();
 
-    lblTitulo.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
-    lblTitulo.setText("Carga de notas");
-
-    lblAlumno.setText("Alumno:");
-
-    cmboAlumnos.addItemListener(new java.awt.event.ItemListener() {
-      public void itemStateChanged(java.awt.event.ItemEvent evt) {
-        cmboAlumnosItemStateChanged(evt);
+    jTable1.setModel(new javax.swing.table.DefaultTableModel(
+      new Object [][] {
+        {null, null, null, null},
+        {null, null, null, null},
+        {null, null, null, null},
+        {null, null, null, null}
+      },
+      new String [] {
+        "Title 1", "Title 2", "Title 3", "Title 4"
       }
-    });
-    cmboAlumnos.addActionListener(new java.awt.event.ActionListener() {
+    ));
+    jScrollPane2.setViewportView(jTable1);
+
+    pnlFondo.setBackground(new java.awt.Color(255, 255, 255));
+
+    btnCancelar.setBackground(new java.awt.Color(255, 255, 255));
+    btnCancelar.setText("Cancelar");
+    btnCancelar.addActionListener(new java.awt.event.ActionListener() {
       public void actionPerformed(java.awt.event.ActionEvent evt) {
-        cmboAlumnosActionPerformed(evt);
+        btnCancelarActionPerformed(evt);
       }
     });
 
+    btnGuardar.setBackground(new java.awt.Color(255, 255, 255));
+    btnGuardar.setText("Guardar");
+    btnGuardar.addActionListener(new java.awt.event.ActionListener() {
+      public void actionPerformed(java.awt.event.ActionEvent evt) {
+        btnGuardarActionPerformed(evt);
+      }
+    });
+
+    tbleMaterias.setBackground(new java.awt.Color(255, 255, 255));
     tbleMaterias.setModel(new javax.swing.table.DefaultTableModel(
       new Object [][] {
 
@@ -73,60 +93,90 @@ public class ManipularNotas extends javax.swing.JInternalFrame {
     });
     jScrollPane1.setViewportView(tbleMaterias);
 
-    btnGuardar.setText("Guardar");
-    btnGuardar.addActionListener(new java.awt.event.ActionListener() {
+    cmboAlumnos.setBackground(new java.awt.Color(255, 255, 255));
+    cmboAlumnos.addItemListener(new java.awt.event.ItemListener() {
+      public void itemStateChanged(java.awt.event.ItemEvent evt) {
+        cmboAlumnosItemStateChanged(evt);
+      }
+    });
+    cmboAlumnos.addActionListener(new java.awt.event.ActionListener() {
       public void actionPerformed(java.awt.event.ActionEvent evt) {
-        btnGuardarActionPerformed(evt);
+        cmboAlumnosActionPerformed(evt);
       }
     });
 
-    btnCancelar.setText("Cancelar");
-    btnCancelar.addActionListener(new java.awt.event.ActionListener() {
+    lblAlumno.setText("Alumno:");
+
+    lblTitulo.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
+    lblTitulo.setText("Carga de notas");
+
+    btnSalir.setBackground(new java.awt.Color(255, 255, 255));
+    btnSalir.setText("X");
+    btnSalir.addActionListener(new java.awt.event.ActionListener() {
       public void actionPerformed(java.awt.event.ActionEvent evt) {
-        btnCancelarActionPerformed(evt);
+        btnSalirActionPerformed(evt);
       }
     });
+
+    javax.swing.GroupLayout pnlFondoLayout = new javax.swing.GroupLayout(pnlFondo);
+    pnlFondo.setLayout(pnlFondoLayout);
+    pnlFondoLayout.setHorizontalGroup(
+      pnlFondoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+      .addGroup(pnlFondoLayout.createSequentialGroup()
+        .addGroup(pnlFondoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+          .addGroup(pnlFondoLayout.createSequentialGroup()
+            .addGap(0, 0, Short.MAX_VALUE)
+            .addComponent(lblTitulo)
+            .addGap(86, 86, 86)
+            .addComponent(btnSalir))
+          .addGroup(pnlFondoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnlFondoLayout.createSequentialGroup()
+              .addGap(43, 43, 43)
+              .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 381, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addGroup(pnlFondoLayout.createSequentialGroup()
+              .addGap(132, 132, 132)
+              .addComponent(lblAlumno)
+              .addGap(18, 18, 18)
+              .addComponent(cmboAlumnos, javax.swing.GroupLayout.PREFERRED_SIZE, 162, javax.swing.GroupLayout.PREFERRED_SIZE))))
+        .addContainerGap(42, Short.MAX_VALUE))
+      .addGroup(pnlFondoLayout.createSequentialGroup()
+        .addGap(138, 138, 138)
+        .addComponent(btnGuardar)
+        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+        .addComponent(btnCancelar)
+        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+    );
+    pnlFondoLayout.setVerticalGroup(
+      pnlFondoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+      .addGroup(pnlFondoLayout.createSequentialGroup()
+        .addGap(15, 15, 15)
+        .addGroup(pnlFondoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+          .addComponent(lblTitulo)
+          .addComponent(btnSalir))
+        .addGap(23, 23, 23)
+        .addGroup(pnlFondoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+          .addComponent(lblAlumno)
+          .addComponent(cmboAlumnos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+        .addGap(37, 37, 37)
+        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE)
+        .addGap(18, 18, 18)
+        .addGroup(pnlFondoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+          .addComponent(btnCancelar)
+          .addComponent(btnGuardar))
+        .addContainerGap(67, Short.MAX_VALUE))
+    );
 
     javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
     getContentPane().setLayout(layout);
     layout.setHorizontalGroup(
       layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-      .addGroup(layout.createSequentialGroup()
-        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-          .addGroup(layout.createSequentialGroup()
-            .addGap(30, 30, 30)
-            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 381, javax.swing.GroupLayout.PREFERRED_SIZE))
-          .addGroup(layout.createSequentialGroup()
-            .addGap(99, 99, 99)
-            .addComponent(lblAlumno)
-            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-            .addComponent(cmboAlumnos, javax.swing.GroupLayout.PREFERRED_SIZE, 162, javax.swing.GroupLayout.PREFERRED_SIZE))
-          .addGroup(layout.createSequentialGroup()
-            .addGap(148, 148, 148)
-            .addComponent(lblTitulo))
-          .addGroup(layout.createSequentialGroup()
-            .addGap(126, 126, 126)
-            .addComponent(btnGuardar)
-            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-            .addComponent(btnCancelar)))
-        .addContainerGap(27, Short.MAX_VALUE))
+      .addComponent(pnlFondo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
     );
     layout.setVerticalGroup(
       layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-      .addGroup(layout.createSequentialGroup()
-        .addContainerGap()
-        .addComponent(lblTitulo)
-        .addGap(22, 22, 22)
-        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
-          .addComponent(cmboAlumnos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-          .addComponent(lblAlumno))
-        .addGap(18, 18, 18)
-        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE)
-        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-          .addComponent(btnGuardar)
-          .addComponent(btnCancelar))
-        .addGap(0, 136, Short.MAX_VALUE))
+      .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+        .addGap(0, 6, Short.MAX_VALUE)
+        .addComponent(pnlFondo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
     );
 
     pack();
@@ -146,6 +196,8 @@ public class ManipularNotas extends javax.swing.JInternalFrame {
 
   private void btnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarActionPerformed
 
+    boolean notasActualizadas = false;
+
     Alumno alumnoSeleccionado = alumnos.get(cmboAlumnos.getSelectedIndex());
 
     for (int i = 0; i < model.getRowCount(); i++) {
@@ -153,18 +205,30 @@ public class ManipularNotas extends javax.swing.JInternalFrame {
       String calif = model.getValueAt(i, 2).toString();
       double nota = Double.valueOf(calif);
 
-      curData.actualizarNota(alumnoSeleccionado, mat, nota);
+      if (curData.actualizarNota(alumnoSeleccionado, mat, nota)) {
+        notasActualizadas = true;
+      }
     }
 
+    JOptionPane.showMessageDialog(this, (notasActualizadas ? "Las notas fueron actualizadas" : "No se pudo actualizar las notas"));
+
   }//GEN-LAST:event_btnGuardarActionPerformed
+
+  private void btnSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalirActionPerformed
+    dispose();
+  }//GEN-LAST:event_btnSalirActionPerformed
 
   // Variables declaration - do not modify//GEN-BEGIN:variables
   private javax.swing.JButton btnCancelar;
   private javax.swing.JButton btnGuardar;
+  private javax.swing.JToggleButton btnSalir;
   private javax.swing.JComboBox<String> cmboAlumnos;
   private javax.swing.JScrollPane jScrollPane1;
+  private javax.swing.JScrollPane jScrollPane2;
+  private javax.swing.JTable jTable1;
   private javax.swing.JLabel lblAlumno;
   private javax.swing.JLabel lblTitulo;
+  private javax.swing.JPanel pnlFondo;
   private javax.swing.JTable tbleMaterias;
   // End of variables declaration//GEN-END:variables
 

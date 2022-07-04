@@ -7,12 +7,12 @@ import java.awt.Color;
 
 public class MateriaVista extends javax.swing.JInternalFrame {
 
-   private MateriaData md;
+    private MateriaData md;
 
-  public MateriaVista(Conexion con) {
-    initComponents();
-    md = new MateriaData(con);
-  }
+    public MateriaVista(Conexion con) {
+        initComponents();
+        md = new MateriaData(con);
+    }
 
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -304,27 +304,27 @@ public class MateriaVista extends javax.swing.JInternalFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-     private void limpiarCampos() {
-    jtCodigo.setText(" ingrese codigo");
-    jtNombre.setText(" ingrese nombre");
-    jtAnio.setText(" ingrese año");
-    jcEstado.setSelected(false);
-  }
-    
+    private void limpiarCampos() {
+        jtCodigo.setText(" ingrese codigo");
+        jtNombre.setText(" ingrese nombre");
+        jtAnio.setText(" ingrese año");
+        jcEstado.setSelected(false);
+    }
+
     private void jbBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbBuscarActionPerformed
 
-          int id = Integer.parseInt(jtCodigo.getText());
-    Materia materia = md.obtenerMateria(id);
+        int id = Integer.parseInt(jtCodigo.getText());
+        Materia materia = md.obtenerMateria(id);
 
 //todavia queda validar si existe materia con dicho ID--
-    jtNombre.setText(materia.getNombre());
-    jtAnio.setText(String.valueOf(materia.getAnio()));
-    jcEstado.setSelected(materia.isActivo());
+        jtNombre.setText(materia.getNombre());
+        jtAnio.setText(String.valueOf(materia.getAnio()));
+        jcEstado.setSelected(materia.isActivo());
 
-    jbBorrar.setEnabled(true);
-    jbActualizar.setEnabled(true);
-    jbGuardar.setEnabled(false);
-    
+        jbBorrar.setEnabled(true);
+        jbActualizar.setEnabled(true);
+        jbGuardar.setEnabled(false);
+
     }//GEN-LAST:event_jbBuscarActionPerformed
 
     private void jtCodigoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtCodigoActionPerformed
@@ -332,11 +332,11 @@ public class MateriaVista extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jtCodigoActionPerformed
 
     private void jtAnioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtAnioActionPerformed
-  
+
     }//GEN-LAST:event_jtAnioActionPerformed
 
     private void jcEstadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jcEstadoActionPerformed
-      
+
     }//GEN-LAST:event_jcEstadoActionPerformed
 
     private void jbBorrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbBorrarActionPerformed
@@ -397,16 +397,16 @@ public class MateriaVista extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_JbSalirActionPerformed
 
     private void jtCodigoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jtCodigoMouseClicked
-    jtCodigo.setText("");
+        jtCodigo.setText("");
 
     }//GEN-LAST:event_jtCodigoMouseClicked
 
     private void jtNombreMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jtNombreMouseClicked
-
+        jtNombre.setText("");
     }//GEN-LAST:event_jtNombreMouseClicked
 
     private void jtAnioMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jtAnioMouseClicked
-
+        jtAnio.setText("");
     }//GEN-LAST:event_jtAnioMouseClicked
 
     private void jtCodigoMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jtCodigoMouseEntered
@@ -416,7 +416,7 @@ public class MateriaVista extends javax.swing.JInternalFrame {
 
     private void jtCodigoMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jtCodigoMouseExited
         jtCodigo.setBackground(Color.WHITE);
-         jtCodigo.setForeground(Color.GRAY);
+        jtCodigo.setForeground(Color.GRAY);
     }//GEN-LAST:event_jtCodigoMouseExited
 
 

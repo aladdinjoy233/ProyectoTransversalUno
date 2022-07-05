@@ -203,10 +203,18 @@ public class ManipularNotas extends javax.swing.JInternalFrame {
     for (int i = 0; i < model.getRowCount(); i++) {
       Materia mat = matData.obtenerMateria((Integer) model.getValueAt(i, 0));
       String calif = model.getValueAt(i, 2).toString();
-      double nota = Double.valueOf(calif);
 
-      if (curData.actualizarNota(alumnoSeleccionado, mat, nota)) {
-        notasActualizadas = true;
+      //      Validar numero ingresado
+      try {
+        double nota = Double.valueOf(calif);
+        
+        if (curData.actualizarNota(alumnoSeleccionado, mat, nota)) {
+          notasActualizadas = true;
+        }
+        
+      } catch (NumberFormatException exc) {
+        JOptionPane.showMessageDialog(this, "Error: dato ingresado no es un numero");
+        break;
       }
     }
 

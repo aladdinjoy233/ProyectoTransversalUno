@@ -337,10 +337,12 @@ public class MateriaVista extends javax.swing.JInternalFrame {
 
     private void jbBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbBuscarActionPerformed
 
+        try{
         int id = Integer.parseInt(jtCodigo.getText());
+        
         Materia materia = md.obtenerMateria(id);
 
-//todavia queda validar si existe materia con dicho ID--
+        if(md.existeMateria(materia)){
         jtNombre.setText(materia.getNombre());
         jtAnio.setText(String.valueOf(materia.getAnio()));
         jcEstado.setSelected(materia.isActivo());
@@ -348,11 +350,17 @@ public class MateriaVista extends javax.swing.JInternalFrame {
         jbBorrar.setEnabled(true);
         jbActualizar.setEnabled(true);
         jbGuardar.setEnabled(false);
-
+        }else{
+            JOptionPane.showMessageDialog(null, "Error al encontrar materia");
+        }
+        }catch(NumberFormatException e){
+             JOptionPane.showMessageDialog(null, "El codigo debe ser un numero");
+        } 
+        
     }//GEN-LAST:event_jbBuscarActionPerformed
 
     private void jtCodigoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtCodigoActionPerformed
-
+        
     }//GEN-LAST:event_jtCodigoActionPerformed
 
     private void jtAnioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtAnioActionPerformed
@@ -374,9 +382,8 @@ public class MateriaVista extends javax.swing.JInternalFrame {
 
         if (md.existeMateria(materia) == false) {
             JOptionPane.showMessageDialog(this, nombre + " no existe o esta inactiva");
-        } else {
-            md.borrarMateria(id);
-            JOptionPane.showMessageDialog(this, nombre + " fue borrado exitosamente");
+        }else{
+              md.borrarMateria(id);
         }
     }//GEN-LAST:event_jbBorrarActionPerformed
 
@@ -403,6 +410,7 @@ public class MateriaVista extends javax.swing.JInternalFrame {
 
     private void jbGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbGuardarActionPerformed
 
+        try{
         String nombre = jtNombre.getText();
         int anio = Integer.parseInt(jtAnio.getText());
         boolean estado = jcEstado.isSelected();
@@ -414,6 +422,9 @@ public class MateriaVista extends javax.swing.JInternalFrame {
         }
 
         jtCodigo.setText(materia.getId() + "");
+         }catch(NumberFormatException e){
+             JOptionPane.showMessageDialog(null, "El año debe ser un numero");
+        } 
     }//GEN-LAST:event_jbGuardarActionPerformed
 
     private void JbSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JbSalirActionPerformed

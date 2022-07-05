@@ -3,15 +3,11 @@ package colegio.vistas;
 import colegio.entidades.Materia;
 import javax.swing.JOptionPane;
 import colegio.dao.*;
-import colegio.entidades.Alumno;
 import java.awt.Color;
-import java.util.ArrayList;
 
 public class MateriaVista extends javax.swing.JInternalFrame {
 
     private MateriaData md;
-    private Conexion c = new Conexion();
-    private CursadaData cd = new CursadaData(c);
 
     public MateriaVista(Conexion con) {
         initComponents();

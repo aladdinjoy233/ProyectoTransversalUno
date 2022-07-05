@@ -178,6 +178,9 @@
       </Properties>
     </Component>
     <Component class="javax.swing.JTextField" name="mADni">
+      <Events>
+        <EventHandler event="focusLost" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="mADniFocusLost"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JLabel" name="mAlabelApellido">
       <Properties>
@@ -192,6 +195,7 @@
     </Component>
     <Component class="javax.swing.JTextField" name="mAapellido">
       <Events>
+        <EventHandler event="focusLost" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="mAapellidoFocusLost"/>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="mAapellidoActionPerformed"/>
       </Events>
     </Component>
@@ -204,6 +208,7 @@
     </Component>
     <Component class="javax.swing.JCheckBox" name="mAestado">
       <Properties>
+        <Property name="selected" type="boolean" value="true"/>
         <Property name="text" type="java.lang.String" value="Activo"/>
       </Properties>
       <Events>
@@ -226,6 +231,7 @@
     <Component class="javax.swing.JButton" name="mAbtnBorrar">
       <Properties>
         <Property name="text" type="java.lang.String" value="Borrar"/>
+        <Property name="enabled" type="boolean" value="false"/>
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="mAbtnBorrarActionPerformed"/>
@@ -234,6 +240,7 @@
     <Component class="javax.swing.JButton" name="mABtnActualizar">
       <Properties>
         <Property name="text" type="java.lang.String" value="Actualizar"/>
+        <Property name="enabled" type="boolean" value="false"/>
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="mABtnActualizarActionPerformed"/>
@@ -242,6 +249,7 @@
     <Component class="javax.swing.JButton" name="mAbtnLimpiar">
       <Properties>
         <Property name="text" type="java.lang.String" value="Limpiar"/>
+        <Property name="enabled" type="boolean" value="false"/>
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="mAbtnLimpiarActionPerformed"/>

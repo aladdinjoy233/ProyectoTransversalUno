@@ -285,6 +285,7 @@ public class menuAlumnos extends javax.swing.JInternalFrame {
             LocalDate fechNac = LocalDate.parse(fecha, DateTimeFormatter.ofPattern("dd-MM-yyyy"));
             //-----------------------------------------------------------------------------------//
             boolean activo = mAestado.isEnabled();
+            
             Alumno alumno = new Alumno(nombre, apellido, fechNac, dni, activo);
             if (alumnoData.agregarAlumno(alumno)) {
                 mAid.setText(alumno.getId() + "");
